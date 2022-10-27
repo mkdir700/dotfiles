@@ -41,6 +41,7 @@ set NERDTree
 set surround
 " 启用multi cursor
 set multiple-cursors
+set sneak
 " 显示行号
 set nu
 " 显示相对行号
