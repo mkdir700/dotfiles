@@ -26,6 +26,7 @@ map Q gq
 
 " Find more examples here: https://jb.gg/share-ideavimrc
 
+" 自动切换输入法
 set keep-english-in-normal
 set keep-english-in-normal-and-restore-in-insert
 
@@ -36,12 +37,12 @@ Plug '<extension-github-reference>'
 let g:highlightedyank_highlight_duration = "1000"
 " leader
 let mapleader = "  "
+set sneak
 set NERDTree
 " 启用vim surround功能
 set surround
 " 启用multi cursor
 set multiple-cursors
-set sneak
 " 显示行号
 set nu
 " 显示相对行号
