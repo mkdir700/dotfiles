@@ -168,7 +168,7 @@ nnoremap <leader>gf :action Git.Fetch<CR>
 nnoremap <leader>gb :action Git.Branches<CR>
 nnoremap <leader>gc :action Git.Commit<CR>
 nnoremap <leader>gs :action Git.Stash<CR>
-nnoremap <leader>gus :action Git.Unstash<CR>
+nnoremap <leader>gS :action Git.Unstash<CR>
 
 " Bookmarks
 nnoremap <Space>b :action Bookmarks<CR>
