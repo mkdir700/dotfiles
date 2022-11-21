@@ -319,8 +319,13 @@ M.config = function()
       "fedorenchik/VimCalc3",
       cmd = { "Calc" },
     },
-    { "nvim-tree/nvim-web-devicons" },
     { "github/copilot.vim", run = ":Copilot setup" },
+    { 
+      "kdheepak/lazygit.nvim",
+      config = function ()
+        require("user.config.telescope-lazygit").config()
+      end
+    },
   }
 end
 

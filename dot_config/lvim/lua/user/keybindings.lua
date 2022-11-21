@@ -10,19 +10,19 @@ end
 
 M.config = function()
   --------------
-  -- 屏幕滚动 --
+  -- 屏幕(screen)滚动 --
   --------------
   -- plugin: neoscroll.nvim
 
   --------------
-  -- 终端管理 --
+  -- 终端(terminal)管理 --
   --------------
-  map("t", "<ESC>", "<C-\\><C-n>")
+  map("t", "<C-q>[", "<C-\\><C-n>")
   map("t", "<C-h>", "<BS>")
   map("t", "<C-k>", "<ESC>d$a<BS><BS>")
 
   --------------
-  -- 窗口管理 --
+  -- 窗口(widnows)管理 --
   --------------
   map('n', "<M-n>", ":resize -2<CR>")
   map('n', "<M-p>", ":resize +2<CR>")
@@ -30,7 +30,7 @@ M.config = function()
   map('n', "<M-[>", ":vertical resize +2<CR>")
 
   --------------
-  -- 光标移动 --
+  -- 光标(cursor)移动 --
   --------------
   -- plugin: clever-f.vim
   -- plugin: hop.nvim
@@ -87,10 +87,10 @@ M.config = function()
   map("i", "jk", "<C-[>")
   map("n", "<", "<<")
   map("n", ">", ">>")
-  map("i", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
-  map("n", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
-  map("i", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>")
-  map("n", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>")
+  -- map("i", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
+  -- map("n", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
+  -- map("i", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>") -- FIXME Invalid
+  -- map("n", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>") -- FIXME Invalid
   map("i", "<C-j>", "<End><CR>")
   map("n", "<C-j>", "<CMD>put =repeat(nr2char(10), v:count1)<CR>")
   map("i", "<C-k>", "repeat('<Del>', strchars(getline('.')) - getcurpos()[2] + 1)", { expr = true })
@@ -177,8 +177,6 @@ M.config = function()
   lvim.builtin.cmp.mapping["<Tab>"] = cmp.mapping(function(fallback)
     if cmp.visible() then
       if luasnip.expandable() and cmp.get_active_entry() == nil then
-        luasnip.expand()
-      else
         cmp.confirm(lvim.builtin.cmp.confirm_opts)
       end
     elseif luasnip.expandable() then
@@ -198,7 +196,6 @@ M.config = function()
   map("i", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
   map("n", "<F2>", "<CMD>lua vim.lsp.buf.rename()<CR>")
   map("n", "<M-.>", "<CMD>lua vim.lsp.buf.code_action()<CR>")
-  map("n", "<C-.>", "<CMD>lua vim.lsp.buf.code_action()<CR>")
   map("n", "<C-_>", "gcc", { noremap = false })
   map("v", "<C-_>", "<Plug>(comment_toggle_linewise_visual)", { noremap = false })
   map("i", "<C-_>", "<CMD>normal gcc<CR>")
@@ -209,30 +206,43 @@ M.config = function()
   map("n", "]e", "<CMD>lua vim.diagnostic.goto_next()<CR>")
 
   --------------
-  -- 文件操作 --
+  -- 文件(File)操作 --
   --------------
   -- plugin: suda.vim
   -- plugin: persistence.nvim
-  lvim.builtin.which_key.mappings["<Tab>"] = { ":try | b# | catch | endtry<CR>", "Switch Buffer" }
-  lvim.keys.normal_mode["<C-k>"] = false
-  map("n", "<C-k><C-o>", "<CMD>Telescope projects<CR>")
-  map("n", "<C-k>o", ":e <C-r>=fnamemodify(expand('%:p'), ':p:h')<CR>/")
-  map("n", "<C-k>n", "<CMD>enew<CR>")
-  map("n", "<C-k>r", "<CMD>Telescope oldfiles<CR>")
-  map("n", "<C-p>", "<CMD>Telescope find_files<CR>")
+  -- lvim.keys.normal_mode["<C-k>"] = false
+  -- map("n", "<C-k><C-o>", "<CMD>Telescope projects<CR>")
+  -- map("n", "<C-k>o", ":e <C-r>=fnamemodify(expand('%:p'), ':p:h')<CR>/")
+  -- map("n", "<C-k>n", "<CMD>enew<CR>")
+  -- map("n", "<C-p>", "<CMD>Telescope find_files<CR>")
+  -- map("n", "<C-k>s", "<CMD>wa<CR>")
+  -- map("n", "<C-k>x", "<CMD>BufferKill<CR>")
+  -- map("n", "<C-k>u", ":try | %bd | catch | endtry<CR>")
+  -- map("n", "<C-k>w", "<CMD>%bd<CR>")
+  -- map("n", "<C-w>z", "<CMD>lua require('user.keybindings').zoom_current_window()<CR>")
+  -- map("n", "<M-s>", "<CMD>SudaWrite<CR>")
   map("n", "<C-s>", "<CMD>w<CR>")
-  map("n", "<M-s>", "<CMD>SudaWrite<CR>")
   map("n", "<C-S-S>", ":saveas <C-r>=fnamemodify('.',':p')<CR>")
-  map("n", "<C-k>s", "<CMD>wa<CR>")
-  map("n", "<C-k>x", "<CMD>BufferKill<CR>")
-  map("n", "<C-k>u", ":try | %bd | catch | endtry<CR>")
-  map("n", "<C-k>w", "<CMD>%bd<CR>")
   map("n", "<Tab>", "<CMD>wincmd w<CR>")
   map("n", "<S-Tab>", "<CMD>wincmd W<CR>")
-  map("n", "<C-w>z", "<CMD>lua require('user.keybindings').zoom_current_window()<CR>")
-  lvim.builtin.which_key.mappings["q"] = { "<CMD>call SmartClose()<CR>", "Quit Cleverly" }
+  lvim.builtin.which_key.mappings["<Tab>"] = { ":try | b# | catch | endtry<CR>", "Switch Buffer" }
+  lvim.builtin.which_key.mappings["k"] = {
+    name = "文件操作",
+    n = { "<CMD>enew<CR>", "新建文件" },
+    o = { "<CMD>Telescope oldfiles<CR>", "老(最近)文件" },
+    f = { "<CMD>Telescope find_files<CR>", "查找当前目录下的文件" },
+    r = { ":e <C-r>=fnamemodify(expand('%:p'), ':p:h')<CR>/", "重命名文件" },
+    p = { "<CMD>Telescope projects<CR>", "最近打开的项目" },
+    s = {
+      name = "保存",
+      s = { "<CMD>SudaWrite<CR>", "超级权限写" },
+      a = { "<CMD>wa<CR>", "保存全部文件" },
+    }
+    -- u = { ":try | %bd | catch | endtry<CR>", "try" }
+  }
+  lvim.builtin.which_key.mappings["q"] = { "<CMD>call SmartClose()<CR>", "退出" }
   lvim.builtin.which_key.mappings["S"] = {
-    name = "Session",
+    name = "会话管理",
     l = { "<CMD>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
     c = { "<CMD>lua require('persistence').load()<cr>", "Restore last session for current dir" },
     q = { "<CMD>lua require('persistence').stop()<cr>", "Quit without saving session" },
@@ -249,9 +259,9 @@ M.config = function()
   -- plugin: undotree
   -- plugin: trouble.nvim
   -- plugin: nvim-bqf
-  map("n", "<C-S-E>", "<CMD>NvimTreeFindFile<CR>")
-  map("n", "<C-S-M>", "<CMD>Trouble workspace_diagnostics<CR>")
-  map("n", "<C-S-U>", "<CMD>lua require('telescope').extensions.notify.notify()<CR>")
+  -- map("n", "<C-M-E>", "<CMD>NvimTreeFindFile<CR>")
+  -- map("n", "<C-S-M>", "<CMD>Trouble workspace_diagnostics<CR>")
+  -- map("n", "<C-S-U>", "<CMD>lua require('telescope').extensions.notify.notify()<CR>")
   lvim.builtin.which_key.mappings["a"] = {
     name = "Application",
     e = { "<CMD>NvimTreeFindFile<CR>", "Explorer" },
@@ -264,21 +274,22 @@ M.config = function()
   --------------
   -- 其他按键 --
   --------------
-  map("n", "<M-e>", "<CMD>call Open_file_in_explorer()<CR>")
-  map("n", "<M-z>", "<CMD>let &wrap=!&wrap<CR>")
-  map("n", "<M-t>", "<CMD>TranslateW<CR>")
-  map("v", "<M-t>", ":TranslateW<CR>")
-  map("n", "<M-T>", "<CMD>TranslateR<CR>")
-  map("v", "<M-T>", ":TranslateR<CR>")
-  map("n", "<C-S-P>", "<CMD>Telescope commands<CR>")
-  map("n", "<C-k><C-s>", "<CMD>Telescope keymaps<CR>")
+  -- map("n", "<M-e>", "<CMD>call Open_file_in_explorer()<CR>")
+  -- map("n", "<M-z>", "<CMD>let &wrap=!&wrap<CR>")
+  -- map("n", "<M-t>", "<CMD>TranslateW<CR>")
+  -- map("v", "<M-t>", ":TranslateW<CR>")
+  -- map("n", "<M-T>", "<CMD>TranslateR<CR>")
+  -- map("v", "<M-T>", ":TranslateR<CR>")
+  -- map("n", "<C-S-P>", "<CMD>Telescope commands<CR>")
+  -- map("n", "<C-k><C-s>", "<CMD>Telescope keymaps<CR>")
   lvim.builtin.which_key.mappings[";"] = nil
   lvim.builtin.which_key.mappings["/"] = nil
-  -- lvim.builtin.which_key.mappings["w"] = nil
   lvim.builtin.which_key.mappings["h"] = nil
   lvim.builtin.which_key.mappings["f"] = nil
-  -- lvim.builtin.which_key.mappings["c"] = nil
   lvim.builtin.which_key.mappings["e"] = nil
+  -- lvim.builtin.which_key.mappings["w"] = nil
+  -- lvim.builtin.which_key.mappings["c"] = nil
+
 
   vim.cmd([[
 function! C_Right() abort

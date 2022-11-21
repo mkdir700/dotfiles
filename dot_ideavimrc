@@ -33,7 +33,6 @@ set keep-english-in-normal-and-restore-in-insert
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
-Plug '<extension-github-reference>'
 let g:highlightedyank_highlight_duration = "1000"
 " leader
 let mapleader = "  "
@@ -73,11 +72,14 @@ inoremap <A-b> <ESC>bi
 inoremap <C-k> <ESC>ld$a
 inoremap <C-a> <C-o>^
 inoremap <C-e> <C-o>$
-inoremap <C-S-h> <Delete>
+inoremap <C-d> <Delete>
 inoremap <C-h> <Backspace>
+nnoremap < <<
+nnoremap > >>
+vnoremap < <gv
+vnoremap > >gv
 " 删除光标前的一个单词"
 " inoremap <C-d> <Fn><LeftOption><Backspace><CR>
-
 
 " Visual Model
 vnoremap $1 <esc>`>a)<esc>`<i(
@@ -97,6 +99,9 @@ vnoremap v <Esc>
 vnoremap p "_dhp<ESC>
 
 
+" 取消高亮
+nnoremap <C-l> :noh<CR>
+
 " Normal Model
 " Yank to the end of line
 nnoremap Y y$
@@ -107,9 +112,9 @@ nnoremap U <C-r>
 
 
 " ==Pycharm== "
-nnoremap <Leader>f :action AceAction<CR>
-nnoremap <Leader>F :action AceTargetAction<CR>
-nnoremap <Leader>G :action AceLineAction<CR>
+nnoremap <Space>f :action AceAction<CR>
+nnoremap <Space>F :action AceTargetAction<CR>
+nnoremap <Space>G :action AceLineAction<CR>
 
 " 注释代码 "
 nnoremap <Space>cc :action CommentByLineComment<CR>
@@ -128,7 +133,7 @@ inoremap <c-j> <Esc>:action MoveStatementDown<CR>i
 inoremap <c-k> <Esc>:action MoveStatementUp<CR>i
 vnoremap J :action MoveStatementDown<CR>
 vnoremap K :action MoveStatementUp<CR>
-inoremap <c-l> <Esc>:action EditorCompleteStatement<CR>
+" inoremap <C-l> <Esc>:action EditorCompleteStatement<CR>
 nnoremap <Space>t :action Refactorings.QuickListPopupAction<CR>
 vnoremap <Space>t :action Refactorings.QuickListPopupAction<CR>
 
@@ -144,9 +149,9 @@ nnoremap <Space>kd :action ContextDebug<CR>
 nnoremap <Space>ss :action SearchEverywhere<CR>
 nnoremap <Space>sg :action GotoFile<CR>
 " next error
-nnoremap <Space>ge :action GotoNextError<CR>
+nnoremap ]e :action GotoNextError<CR>
 " previous error
-nnoremap <Space>gE :action GotoPreviousError<CR>
+nnoremap [e :action GotoPreviousError<CR>
 " 跳转到上一个窗口
 nnoremap <Leader>gW :action JumpToLastWindow<CR>
 " 跳转到上次编辑位置
@@ -158,7 +163,7 @@ nnoremap <leader>t :action ActivateTerminalToolWindow<CR>
 
 " Edit ideavimrc
 nnoremap <Space>vim :e ~/.ideavimrc<CR>
-nnoremap <Space>lvim :action IdeaVim.ReloadVimRc.reload<CR>
+nnoremap <Leader>vim :action IdeaVim.ReloadVimRc.reload<CR>
 
 " VSC
 nnoremap <Space>vsc :action Vcs.QuickListPopupAction<CR>
@@ -173,11 +178,11 @@ nnoremap <leader>gS :action Git.Unstash<CR>
 
 " Bookmarks
 nnoremap <Space>b :action Bookmarks<CR>
-nnoremap <leader>ba :action ToggleBookmark<CR>
-nnoremap <leader>bn :action GotoNextBookmark<CR>
-nnoremap <leader>bp :action GotoPreviousBookmark<CR>
-nnoremap <leader>bs :action ShowBookmarks<CR>
-nnoremap <leader>bc :action ClearBookmarks<CR>
+nnoremap <Space>mm :action ToggleBookmark<CR>
+nnoremap <Space>mn :action GotoNextBookmark<CR>
+nnoremap <Space>mp :action GotoPreviousBookmark<CR>
+nnoremap <Space>ms :action ShowBookmarks<CR>
+nnoremap <Space>mc :action ClearBookmarks<CR>
 nnoremap <leader>b1 :action ToggleBookmark0<CR>
 nnoremap <leader>b1 :action ToggleBookmark1<CR>
 nnoremap <leader>b2 :action ToggleBookmark2<CR>
@@ -198,3 +203,7 @@ nnoremap <leader>g6 :action GotoBookmark6<CR>
 nnoremap <leader>g7 :action GotoBookmark7<CR>
 nnoremap <leader>g8 :action GotoBookmark8<CR>
 nnoremap <leader>g9 :action GotoBookmark9<CR>
+
+" 打开 文件树
+
+nnoremap <Space>e :NERDTree<CR>

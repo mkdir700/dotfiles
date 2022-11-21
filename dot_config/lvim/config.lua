@@ -42,6 +42,8 @@ require("user.plugins").config()
 
 require("user.keybindings").config()
 
+require("user.config.toggleterm").config()
+
 
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
 lvim.format_on_save.enabled = true
