@@ -305,6 +305,7 @@ M.config = function()
         return (_time.hour >= 0 and _time.hour < 15)
       end,
     },
+    { "nvim-tree/nvim-web-devicons" },
     --------------
     -- 其他功能 --
     --------------
@@ -320,9 +321,9 @@ M.config = function()
       cmd = { "Calc" },
     },
     { "github/copilot.vim", run = ":Copilot setup" },
-    { 
+    {
       "kdheepak/lazygit.nvim",
-      config = function ()
+      config = function()
         require("user.config.telescope-lazygit").config()
       end
     },
