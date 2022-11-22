@@ -184,6 +184,12 @@ M.config = function()
 		{
 			"windwp/nvim-ts-autotag",
 		},
+		{
+			"simrat39/rust-tools.nvim",
+			config = function()
+				require("user.config.rust-tools").config()
+			end,
+		},
 		--------------
 		-- 文件操作 --
 		--------------
