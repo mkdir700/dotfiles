@@ -154,36 +154,37 @@ M.config = function()
 				require("user.config.fidget").config()
 			end,
 		},
-		{
-			"ray-x/lsp_signature.nvim",
-			config = function()
-				require("user.config.lsp_signature").config()
-			end,
-		},
-		{
-			"benfowler/telescope-luasnip.nvim",
-			keys = { "<M-i>" },
-			config = function()
-				require("user.config.telescope-luasnip").config()
-			end,
-		},
-		{
-			"tamago324/cmp-zsh",
-			config = function()
-				require("user.config.cmp_zsh").config()
-			end,
-			requires = { "Shougo/deol.nvim" },
-		},
-		{
-			"p00f/clangd_extensions.nvim",
-			ft = { "c", "cpp", "objc", "objcpp" },
-			config = function()
-				require("user.config.clangd_extensions").config()
-			end,
-		},
-		{
-			"windwp/nvim-ts-autotag",
-		},
+		-- {
+		-- 	"ray-x/lsp_signature.nvim",
+		-- 	config = function()
+		-- 		require("user.config.lsp_signature").config()
+		-- 	end,
+		-- },
+		--
+		-- {
+		-- 	"benfowler/telescope-luasnip.nvim",
+		-- 	keys = { "<M-i>" },
+		-- 	config = function()
+		-- 		require("user.config.telescope-luasnip").config()
+		-- 	end,
+		-- },
+		-- {
+		-- 	"tamago324/cmp-zsh",
+		-- 	config = function()
+		-- 		require("user.config.cmp_zsh").config()
+		-- 	end,
+		-- 	requires = { "Shougo/deol.nvim" },
+		-- },
+		-- {
+		-- 	"p00f/clangd_extensions.nvim",
+		-- 	ft = { "c", "cpp", "objc", "objcpp" },
+		-- 	config = function()
+		-- 		require("user.config.clangd_extensions").config()
+		-- 	end,
+		-- },
+		-- {
+		-- 	"windwp/nvim-ts-autotag",
+		-- },
 		{
 			"simrat39/rust-tools.nvim",
 			config = function()
