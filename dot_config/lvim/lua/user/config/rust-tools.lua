@@ -1,24 +1,24 @@
 local M = {}
 
-local function on_attach(_, bufnr)
-	require("rust-tools").inlay_hints.set()
-	require("rust-tools").inlay_hints.enable()
-	local bufopts = { silent = true, noremap = true, buffer = bufnr }
-	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-	vim.keymap.set("n", "K", require("rust-tools").hover_actions.hover_actions, { buffer = bufnr })
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-	vim.keymap.set("n", "gI", vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, bufopts)
-	-- lvim.keys.normal_mode[""] = {}
-	-- vim.keymap.set("n", "gl", function()
-	-- 	local config = lvim.lsp.diagnostics.float
-	-- 	config.scope = "line"
-	-- 	vim.diagnostic.open_float(0, config)
-	-- end, bufopts)
-	--
-end
+-- local function on_attach(_, bufnr)
+-- 	require("rust-tools").inlay_hints.set()
+-- 	require("rust-tools").inlay_hints.enable()
+-- 	local bufopts = { silent = true, noremap = true, buffer = bufnr }
+-- 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+-- 	vim.keymap.set("n", "K", require("rust-tools").hover_actions.hover_actions, { buffer = bufnr })
+-- 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+-- 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+-- 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+-- 	vim.keymap.set("n", "gI", vim.lsp.buf.implementation, bufopts)
+-- 	vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, bufopts)
+-- 	-- lvim.keys.normal_mode[""] = {}
+-- 	-- vim.keymap.set("n", "gl", function()
+-- 	-- 	local config = lvim.lsp.diagnostics.float
+-- 	-- 	config.scope = "line"
+-- 	-- 	vim.diagnostic.open_float(0, config)
+-- 	-- end, bufopts)
+-- 	--
+-- end
 
 M.config = function()
 	require("rust-tools").setup({
@@ -32,9 +32,6 @@ M.config = function()
 				show_parameter_hints = true,
 				show_variable_name = true,
 				parameter_hints_prefix = "<- ",
-
-				-- prefix for all the other hints (type, chaining)
-				-- default: "=>"
 				other_hints_prefix = "=> ",
 			},
 		},

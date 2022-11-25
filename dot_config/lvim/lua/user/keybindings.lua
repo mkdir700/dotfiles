@@ -65,6 +65,8 @@ M.config = function()
 	map("n", "mg", "<Plug>BookmarkMoveToLine", { noremap = false })
 	map("n", "]g", "<CMD>Gitsigns next_hunk<CR>")
 	map("n", "[g", "<CMD>Gitsigns prev_hunk<CR>")
+	map("n", "]t", "<CMD>lua require('todo-comments').jump_next()<CR>", { desc = "Next todo comments" })
+	map("n", "[t", "<CMD>lua require('todo-comments').jump_prev()<CR>", { desc = "Previous todo comments" })
 	map("n", "R", "<CMD>BufferLineCycleNext<CR>")
 	map("n", "E", "<CMD>BufferLineCyclePrev<CR>")
 

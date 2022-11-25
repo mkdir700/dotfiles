@@ -261,6 +261,10 @@ M.config = function()
 				require("user.config.dressing").config()
 			end,
 		},
+		{
+			"kosayoda/nvim-lightbulb",
+			requires = "antoinemadec/FixCursorHold.nvim",
+		},
 		--------------
 		-- 界面美化 --
 		--------------
@@ -276,9 +280,7 @@ M.config = function()
 		-- 		vim.g.indent_blankline_show_first_indent_level = false
 		-- 	end,
 		-- },
-		{
-			"p00f/nvim-ts-rainbow",
-		},
+		{ "p00f/nvim-ts-rainbow" },
 		{
 			"norcalli/nvim-colorizer.lua",
 			config = function()
@@ -343,19 +345,6 @@ M.config = function()
 			end,
 		},
 		{
-			"chipsenkbeil/distant.nvim",
-			tag = "v0.2",
-			config = function()
-				require("user.config.distant").setup()
-			end,
-		},
-		{
-			"klen/nvim-test",
-			config = function()
-				require("user.config.nvim-test").config()
-			end,
-		},
-		{
 			"nvim-neotest/neotest",
 			requires = {
 				"nvim-lua/plenary.nvim",
@@ -367,6 +356,7 @@ M.config = function()
 				require("user.config.nvim-neotest").config()
 			end,
 		},
+		{ "tpope/vim-fugitive" },
 	}
 end
 
