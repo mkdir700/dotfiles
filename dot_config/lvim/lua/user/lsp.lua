@@ -6,7 +6,7 @@ M.config = function()
 	require("lvim.lsp.null-ls.linters").setup({
 		{ filetypes = { "sh" }, command = "shellcheck" },
 		{ filetypes = { "go" }, command = "golangci_lint" },
-		{ filetypes = { "python" }, command = "mypy" },
+		{ filetypes = { "python" }, command = "mypy", args = { "--ignore-missing-imports" } },
 		{ filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }, command = "eslint" },
 		{ filetypes = { "html" }, command = "tidy" },
 		{ filetypes = { "css" }, command = "stylelint" },

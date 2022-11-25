@@ -40,8 +40,6 @@ M.config = function()
 	-- plugin: leap.vim
 	map("c", "<C-a>", "<C-b>", { noremap = true })
 	-- map("", ";", "<CMD>HopChar2<CR>")
-	map("", ";", "<Plug>(leap-forward-to)")
-	map("", "s", "<Plug>(leap-forward-to)")
 	map("", ",", "<CMD>HopLineStartMW<CR>")
 	map("i", "<C-f>", "<Right>")
 	map("i", "<C-b>", "<Left>")

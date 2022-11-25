@@ -22,11 +22,19 @@ M.config = function()
 				require("user.setup.clever-f").setup()
 			end,
 		},
+		-- {
+		-- 	"phaazon/hop.nvim",
+		-- 	cmd = "Hop*",
+		-- 	config = function()
+		-- 		require("user.config.hop").config()
+		-- 	end,
+		-- },
 		{
-			"phaazon/hop.nvim",
-			cmd = "Hop*",
+			"ggandor/leap.nvim",
+			event = "BufRead",
+			keys = { "s", "S" },
 			config = function()
-				require("user.config.hop").config()
+				require("user.config.leap-nvim").config()
 			end,
 		},
 		{
@@ -34,6 +42,12 @@ M.config = function()
 			event = "CursorMoved",
 			setup = function()
 				require("user.setup.matchup").setup()
+			end,
+		},
+		{
+			"nacro90/numb.nvim",
+			config = function()
+				require("numb").setup()
 			end,
 		},
 		--------------
@@ -88,13 +102,6 @@ M.config = function()
 				require("user.config.spectre").config()
 			end,
 		},
-		{
-			"ggandor/leap.nvim",
-			keys = { "s", "S" },
-			config = function()
-				require("user.config.leap-nvim").config()
-			end,
-		},
 		{ "ggandor/flit.nvim" },
 		--------------
 		-- 快速编辑 --
@@ -107,6 +114,12 @@ M.config = function()
 			end,
 			config = function()
 				require("user.config.visual-multi").config()
+			end,
+		},
+		{
+			"monaqa/dial.nvim",
+			config = function()
+				require("user.config.dial").config()
 			end,
 		},
 		--------------
@@ -137,6 +150,7 @@ M.config = function()
 		{
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
+		{ "nvim-treesitter/nvim-treesitter-context" },
 		{
 			"tpope/vim-repeat",
 		},
@@ -214,6 +228,17 @@ M.config = function()
 				require("user.config.scrollbar").config()
 			end,
 		},
+		-- TODO: 必须使用命令才会显示，不会自动加载
+		{
+			"wfxr/minimap.vim",
+			run = "cargo install --locked code-minimap",
+			cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
+			config = function()
+				vim.cmd("let g:minimap_width = 10")
+				vim.cmd("let g:minimap_auto_start = 1")
+				vim.cmd("let g:minimap_auto_start_win_enter = 1")
+			end,
+		},
 		{
 			"sidebar-nvim/sidebar.nvim",
 			cmd = "Sidebar*",
@@ -267,18 +292,6 @@ M.config = function()
 		--------------
 		-- 界面美化 --
 		--------------
-		-- {
-		-- 	"lukas-reineke/indent-blankline.nvim",
-		-- 	event = "BufRead",
-		-- 	setup = function()
-		-- 		vim.g.indentLine_enabled = 1
-		-- 		vim.g.indent_blankline_char = "▏"
-		-- 		vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard", "alpha", "packer" }
-		-- 		vim.g.indent_blankline_buftype_exclude = { "terminal", "quickfix", "nofile", "help" }
-		-- 		vim.g.indent_blankline_show_trailing_blankline_indent = false
-		-- 		vim.g.indent_blankline_show_first_indent_level = false
-		-- 	end,
-		-- },
 		{ "p00f/nvim-ts-rainbow" },
 		{
 			"norcalli/nvim-colorizer.lua",
@@ -356,7 +369,13 @@ M.config = function()
 			end,
 		},
 		{ "tpope/vim-fugitive" },
+		{ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" },
+		{ "f-person/git-blame.nvim" },
+		{ "felipec/vim-sanegx" }, -- FIXME
+		{ "wakatime/vim-wakatime" }, -- 统计 coding 时长
 	}
 end
+
+-- http://www.baidu.com
 
 return M
