@@ -154,13 +154,12 @@ M.config = function()
 				require("user.config.fidget").config()
 			end,
 		},
-		-- {
-		-- 	"ray-x/lsp_signature.nvim",
-		-- 	config = function()
-		-- 		require("user.config.lsp_signature").config()
-		-- 	end,
-		-- },
-		--
+		{
+			"ray-x/lsp_signature.nvim",
+			config = function()
+				require("user.config.lsp_signature").config()
+			end,
+		},
 		-- {
 		-- 	"benfowler/telescope-luasnip.nvim",
 		-- 	keys = { "<M-i>" },
