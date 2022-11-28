@@ -204,6 +204,14 @@ M.config = function()
 				require("user.config.rust-tools").config()
 			end,
 		},
+		-- You must install glow globally
+		-- https://github.com/charmbracelet/glow
+		-- yay -S glow
+		{
+			"npxbr/glow.nvim",
+			ft = { "markdown" },
+			run = "yay -S glow",
+		},
 		--------------
 		-- 文件操作 --
 		--------------
