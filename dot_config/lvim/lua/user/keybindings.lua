@@ -39,8 +39,8 @@ M.config = function()
 	-- plugin: vim-matchup
 	-- plugin: leap.vim
 	map("c", "<C-a>", "<C-b>", { noremap = true })
-	-- map("", ";", "<CMD>HopChar2<CR>")
-	map("", ",", "<CMD>HopLineStartMW<CR>")
+	map("n", ";", "<CMD>HopChar2<CR>", { silent = true })
+	map("n", ",", "<CMD>HopLineStartMW<CR>", { silent = true })
 	map("i", "<C-f>", "<Right>")
 	map("i", "<C-b>", "<Left>")
 
@@ -51,7 +51,9 @@ M.config = function()
 	-- plugin: vim-bookmarks
 	-- plugin: telescope-vim-bookmarks
 	-- HACK: terminal map: ctrl+i -> alt+shift+i
-	map("n", "<M-I>", "<C-i>")
+	map("n", "<C-i>", "<C-i>", { silent = true })
+	map("i", "<C-a>", "<C-[>I") -- 编辑状态下，快速移动至头部
+	map("i", "<C-e>", "<C-[>A") -- 编辑状态下，快速移动至尾部
 	map("n", "mm", "<Plug>BookmarkToggle", { noremap = false })
 	map("n", "mi", "<Plug>BookmarkAnnotate", { noremap = false })
 	map("n", "mn", "<Plug>BookmarkNext", { noremap = false })
