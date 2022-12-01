@@ -122,6 +122,9 @@ M.config = function()
 				require("user.config.dial").config()
 			end,
 		},
+		{
+			"dkarter/bullets.vim",
+		},
 		--------------
 		-- 普通模式 --
 		--------------
@@ -380,7 +383,17 @@ M.config = function()
 		{ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" },
 		{ "f-person/git-blame.nvim" },
 		{ "felipec/vim-sanegx" }, -- FIXME
-		{ "wakatime/vim-wakatime" }, -- 统计 coding 时长
+		-- 统计 coding 时长
+		{ "wakatime/vim-wakatime" },
+		-- 自动保存
+		{
+			"Pocco81/auto-save.nvim",
+			config = function()
+				require("auto-save").setup({
+					enabled = true,
+				})
+			end,
+		},
 	}
 end
 

@@ -67,8 +67,18 @@ M.config = function()
 	map("n", "[g", "<CMD>Gitsigns prev_hunk<CR>")
 	map("n", "]t", "<CMD>lua require('todo-comments').jump_next()<CR>", { desc = "Next todo comments" })
 	map("n", "[t", "<CMD>lua require('todo-comments').jump_prev()<CR>", { desc = "Previous todo comments" })
-	map("n", "R", "<CMD>BufferLineCycleNext<CR>")
-	map("n", "E", "<CMD>BufferLineCyclePrev<CR>")
+	map(
+		"n",
+		"]n",
+		"<CMD>lua require('neotest').jump.next({ status = 'failed' })<CR>",
+		{ desc = "Next failed testcase", silent = true }
+	)
+	map(
+		"n",
+		"[n",
+		"<CMD>lua require('neotest').jump.prev({ status = 'failed' })<CR>",
+		{ desc = "Previous failed testcase", silent = true }
+	)
 
 	--------------
 	-- 全文搜索 --
@@ -121,7 +131,7 @@ M.config = function()
 	-- plugin: nvim-treesitter-textobjects
 	-- plugin: vim-repeate
 	-- plugin: vim-surround
-	map("n", "S", "i<CR><Esc>")
+	-- map("n", "S", "i<CR><Esc>")
 
 	--------------
 	-- 复制粘贴 --

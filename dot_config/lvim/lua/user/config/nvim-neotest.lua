@@ -12,13 +12,13 @@ M.config = function()
 				args = { "--log-level", "DEBUG" },
 				-- Runner to use. Will use pytest if available by default.
 				-- Can be a function to return dynamic value.
-				runner = "pytest",
+				runner = "unittest",
 				-- Custom python path for the runner.
 				-- Can be a string or a list of strings.
 				-- Can also be a function to return dynamic value.
 				-- If not provided, the path will be inferred by checking for
 				-- virtual envs in the local directory and for Pipenev/Poetry configs
-				python = "python",
+				python = "/home/xyz/.virtualenvs/xyz-logistics-hmi-back/bin/python",
 				-- Returns if a given file path is a test file.
 				-- NB: This function is called a lot so don't perform any heavy tasks within it.
 				-- is_test_file = function(file_path)
@@ -32,13 +32,17 @@ M.config = function()
 	-- 	"<CMD>Telescope notify<CR>",
 	-- 	"Notify History",
 	-- }
-	lvim.builtin.which_key.mappings.R = {
+	lvim.builtin.which_key.mappings.t = {
 		name = "Run Tests",
-		r = { "<CMD>lua require('neotest').run.run()<CR>", "运行附近的测试" },
-		d = { "<CMD>lua require('neotest').run.run({strategy = 'dap'})<CR>", "运行附近的测试(DEBUG)" },
-		s = { "<CMD>lua require('neotest').run.stop()<CR>", "停止" },
-		c = { "<CMD>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "运行当前文件" },
-		S = { "<CMD>lua require('neotest').summary.open()<CR>", "查看测试概要" },
+		r = { "<CMD>lua require('neotest').run.run()<CR>", "运行当前测试用例" },
+		R = { "<CMD>lua require('neotest').run.run({strategy = 'dap'})<CR>", "运行当前测试用例(DEBUG)" },
+    l = { "<CMD>lua require('neotest').run.run_last()<CR>", "运行最近测试用例" },
+    L = { "<CMD>lua require('neotest').run.run_last({strategy = 'dap'})<CR>", "运行最近测试用例(DEBUG)" },
+		f = { "<CMD>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "运行当前文件" },
+		s = { "<CMD>lua require('neotest').summary.toggle()<CR>", "查看测试概要" },
+		S = { "<CMD>lua require('neotest').run.stop()<CR>", "停止" },
+    o = { "<CMD>lua require('neotest').output.toggle()<CR>", "查看输出" },
+    p = { "<CMD>lua require('neotest').output_panel.toggle()<CR>", "输出面板" }
 	}
 end
 
