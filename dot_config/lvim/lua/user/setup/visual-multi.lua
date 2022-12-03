@@ -9,6 +9,7 @@ M.setup = function()
     function! VM_Exit()
       exe 'inoremap <buffer><expr><BS> v:lua.MPairs.autopairs_bs('.bufnr().')'
     endf
+    let g:VM_theme = "neon"
   ]])
 end
 

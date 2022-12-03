@@ -44,13 +44,6 @@ M.config = function()
       },
     },
   })
-  -- vim.api.nvim_set_keymap(
-  --   "n",
-  --   "<C-H>",
-  --   "<CMD>lua require('spectre').open_visual({select_word=true,path='/' .. vim.fn.fnameescape(vim.fn.expand('%:p:.'))})<CR>"
-  --   ,
-  --   { noremap = true }
-  -- )
   vim.api.nvim_set_keymap(
     "v",
     "<C-H>",

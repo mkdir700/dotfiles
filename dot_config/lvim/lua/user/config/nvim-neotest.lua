@@ -28,10 +28,6 @@ M.config = function()
 		},
 	})
 
-	-- lvim.builtin.which_key.mappings.s.n = {
-	-- 	"<CMD>Telescope notify<CR>",
-	-- 	"Notify History",
-	-- }
 	lvim.builtin.which_key.mappings.t = {
 		name = "Run Tests",
 		r = { "<CMD>lua require('neotest').run.run()<CR>", "运行当前测试用例" },

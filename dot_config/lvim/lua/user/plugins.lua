@@ -215,6 +215,16 @@ M.config = function()
 			ft = { "markdown" },
 			run = "yay -S glow",
 		},
+		-- 文档
+		{
+			"danymat/neogen",
+			config = function()
+				require("user.config.neogen").setup()
+			end,
+			cmd = { "Neogen" },
+			module = "neogen",
+			disable = false,
+		},
 		--------------
 		-- 文件操作 --
 		--------------

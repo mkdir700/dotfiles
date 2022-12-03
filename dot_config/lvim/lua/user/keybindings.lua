@@ -100,12 +100,12 @@ M.config = function()
 	--------------
 	-- plugin: vim-visual-multi
 	map("i", "jk", "<C-[>")
-	map("n", "<", "<<")
 	map("n", ">", ">>")
-	-- map("i", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
-	-- map("n", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
-	-- map("i", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>") -- FIXME Invalid
-	-- map("n", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>") -- FIXME Invalid
+	map("n", "<", "<<")
+  map("i", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
+	map("n", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
+  map("i", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>")
+	map("n", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>")
 	map("i", "<C-j>", "<End><CR>")
 	map("n", "<C-j>", "<CMD>put =repeat(nr2char(10), v:count1)<CR>")
 	map("i", "<C-k>", "repeat('<Del>', strchars(getline('.')) - getcurpos()[2] + 1)", { expr = true })
@@ -145,15 +145,15 @@ M.config = function()
 	map("n", "=O", "<CMD>put! =@0<CR>")
 	map("v", "<Space>y", '"+y')
 	map("v", "<Space>p", '"+p')
-	lvim.builtin.which_key.mappings["<Space>"] = { "<CMD>let @+ = @0<CR>", "Copy Register 0 to Clipboard" }
-	lvim.builtin.which_key.mappings["y"] = { '"+y', "Yank to Clipboard" }
-	lvim.builtin.which_key.mappings["Y"] = { '"+y$', "Yank All Right to Clipboard" }
-	lvim.builtin.which_key.mappings["p"] = { '"+p', "Paste Clipboard After Cursor" }
-	lvim.builtin.which_key.mappings["P"] = { '"+P', "Paste Clipboard Before Cursor" }
-	lvim.builtin.which_key.mappings["o"] = { "<CMD>put =@+<CR>", "Paste Clipboard to Next Line" }
-	lvim.builtin.which_key.mappings["O"] = { "<CMD>put! =@+<CR>", "Paste Clipboard to Previous Line" }
-	lvim.builtin.which_key.mappings["by"] = { "<CMD>%y +<CR>", "Yank Whole Buffer to Clipboard" }
-	lvim.builtin.which_key.mappings["bp"] = { '<CMD>%d<CR>"+P', "Patse Clipboard to Whole Buffer" }
+	-- lvim.builtin.which_key.mappings["<Space>"] = { "<CMD>let @+ = @0<CR>", "Copy Register 0 to Clipboard" }
+	-- lvim.builtin.which_key.mappings["y"] = { '"+y', "Yank to Clipboard" }
+	-- lvim.builtin.which_key.mappings["Y"] = { '"+y$', "Yank All Right to Clipboard" }
+	-- lvim.builtin.which_key.mappings["p"] = { '"+p', "Paste Clipboard After Cursor" }
+	-- lvim.builtin.which_key.mappings["P"] = { '"+P', "Paste Clipboard Before Cursor" }
+	-- lvim.builtin.which_key.mappings["o"] = { "<CMD>put =@+<CR>", "Paste Clipboard to Next Line" }
+	-- lvim.builtin.which_key.mappings["O"] = { "<CMD>put! =@+<CR>", "Paste Clipboard to Previous Line" }
+	-- lvim.builtin.which_key.mappings["by"] = { "<CMD>%y +<CR>", "Yank Whole Buffer to Clipboard" }
+	-- lvim.builtin.which_key.mappings["bp"] = { '<CMD>%d<CR>"+P', "Patse Clipboard to Whole Buffer" }
 
 	--------------
 	-- 语言服务 --
@@ -167,44 +167,36 @@ M.config = function()
 	local cmp = require("cmp")
 	local luasnip = require("luasnip")
 	local lccm = require("lvim.core.cmp").methods
-	lvim.builtin.cmp.mapping["<C-j>"] = nil
-	lvim.builtin.cmp.mapping["<C-k>"] = nil
-	lvim.builtin.cmp.mapping["<C-f>"] = nil
-	lvim.builtin.cmp.mapping["<C-d>"] = nil
-	lvim.builtin.cmp.mapping["<C-d>"] = nil
-	lvim.builtin.cmp.mapping["<C-e>"] = cmp.mapping.scroll_docs(2)
-	lvim.builtin.cmp.mapping["<C-y>"] = cmp.mapping.scroll_docs(-2)
-	lvim.builtin.cmp.mapping["<CR>"] = cmp.mapping(function(fallback)
-		if cmp.visible() then
-			cmp.confirm(lvim.builtin.cmp.confirm_opts)
-		else
-			fallback()
-		end
-	end)
-	lvim.builtin.cmp.mapping["<M-I>"] = cmp.mapping(function()
-		if cmp.visible() then
-			cmp.abort()
-		else
-			cmp.complete()
-		end
-	end)
-	lvim.builtin.cmp.mapping["<Tab>"] = cmp.mapping(function(fallback)
-		if cmp.visible() then
-			if luasnip.expandable() and cmp.get_active_entry() == nil then
-				cmp.confirm(lvim.builtin.cmp.confirm_opts)
-			end
-		elseif luasnip.expandable() then
-			luasnip.expand()
-		elseif lccm.jumpable() then
-			luasnip.jump(1)
-		elseif lccm.check_backspace() then
-			fallback()
-		elseif lccm.is_emmet_active() then
-			return vim.fn["cmp#complete"]()
-		else
-			fallback()
-		end
-	end, { "i", "s" })
+	lvim.builtin.cmp.mapping = cmp.mapping.preset.insert({
+		["<C-f>"] = nil,
+		["<C-d>"] = nil,
+		["<C-k>"] = cmp.mapping.scroll_docs(-4),
+		["<C-j>"] = cmp.mapping.scroll_docs(4),
+		-- ["<CR>"] = cmp.mapping(function(fallback)
+		-- 	if cmp.visible() then
+		-- 		cmp.confirm(lvim.builtin.cmp.confirm_opts)
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end),
+		-- ["<Tab>"] = cmp.mapping(function(fallback)
+		-- 	if cmp.visible() then
+		-- 		if luasnip.expandable() and cmp.get_active_entry() == nil then
+		-- 			cmp.confirm(lvim.builtin.cmp.confirm_opts)
+		-- 		end
+		-- 	elseif luasnip.expandable() then
+		-- 		luasnip.expand()
+		-- 	elseif lccm.jumpable() then
+		-- 		luasnip.jump(1)
+		-- 	elseif lccm.check_backspace() then
+		-- 		fallback()
+		-- 	elseif lccm.is_emmet_active() then
+		-- 		return vim.fn["cmp#complete"]()
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, { "i", "s" }),
+	})
 
 	map("n", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
 	map("i", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
@@ -218,6 +210,8 @@ M.config = function()
 	map("n", "<M-LeftMouse>", "<LeftMouse><CMD>lua vim.lsp.buf.definition()<CR>")
 	map("n", "[e", "<CMD>lua vim.diagnostic.goto_prev()<CR>")
 	map("n", "]e", "<CMD>lua vim.diagnostic.goto_next()<CR>")
+	lvim.builtin.which_key.mappings.l.g = { "<CMD>Neogen func<CR>", "Func Doc" }
+	lvim.builtin.which_key.mappings.l.G = { "<CMD>Neogen class<CR>", "Class Doc" }
 
 	--------------
 	-- 文件(File)操作 --
@@ -227,8 +221,6 @@ M.config = function()
 	-- lvim.keys.normal_mode["<C-k>"] = false
 	-- map("n", "<C-k><C-o>", "<CMD>Telescope projects<CR>")
 	-- map("n", "<C-k>o", ":e <C-r>=fnamemodify(expand('%:p'), ':p:h')<CR>/")
-	-- map("n", "<C-k>n", "<CMD>enew<CR>")
-	-- map("n", "<C-p>", "<CMD>Telescope find_files<CR>")
 	-- map("n", "<C-k>s", "<CMD>wa<CR>")
 	-- map("n", "<C-k>x", "<CMD>BufferKill<CR>")
 	-- map("n", "<C-k>u", ":try | %bd | catch | endtry<CR>")
@@ -251,6 +243,7 @@ M.config = function()
 			name = "保存",
 			s = { "<CMD>SudaWrite<CR>", "超级权限写" },
 			a = { "<CMD>wa<CR>", "保存全部文件" },
+			o = { ":saveas <C-r>=fnamemodify('.',':p')<CR>", "另存为" },
 		},
 		-- u = { ":try | %bd | catch | endtry<CR>", "try" }
 	}
