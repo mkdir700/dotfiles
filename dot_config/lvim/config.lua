@@ -14,10 +14,11 @@ lvim.builtin.terminal.active = true
 -- lvim.builtin.terminal.open_mapping = "<M-Space>" -- ctrl+`
 lvim.builtin.nvimtree.setup.view.mappings.list = {
 	-- { key = { "<Tab>" }, action = nil },
-	{ key = { "l", "<CR>" }, action = "edit", mode = "n" },
+  { key = { "l", "<CR>" }, action = "edit", mode = "n" },
 	{ key = "h", action = "close_node" },
 	{ key = "v", action = "vsplit" },
 }
+
 
 ----------------------------------------
 -- Telescope
@@ -43,3 +44,5 @@ require("user.plugins").config()
 require("user.keybindings").config()
 
 require("user.config.toggleterm").config()
+
+require("user.telescope").config()

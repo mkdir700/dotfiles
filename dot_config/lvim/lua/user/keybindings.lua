@@ -65,8 +65,7 @@ M.config = function()
 	map("n", "mg", "<Plug>BookmarkMoveToLine", { noremap = false })
 	map("n", "]g", "<CMD>Gitsigns next_hunk<CR>")
 	map("n", "[g", "<CMD>Gitsigns prev_hunk<CR>")
-	map("n", "]t", "<CMD>lua require('todo-comments').jump_next()<CR>", { desc = "Next todo comments" })
-	map("n", "[t", "<CMD>lua require('todo-comments').jump_prev()<CR>", { desc = "Previous todo comments" })
+  -- 测试用例跳转
 	map(
 		"n",
 		"]n",
@@ -79,6 +78,14 @@ M.config = function()
 		"<CMD>lua require('neotest').jump.prev({ status = 'failed' })<CR>",
 		{ desc = "Previous failed testcase", silent = true }
 	)
+  -- Todo 标签跳转
+	map("n", "]t", "<CMD>lua require('todo-comments').jump_next()<CR>", { desc = "Next todo comments" })
+	map("n", "[t", "<CMD>lua require('todo-comments').jump_prev()<CR>", { desc = "Previous todo comments" })
+  -- 缓冲区(buffer)跳转
+	map("n", "[b", "<Plug>(CybuPrev)", { desc = "Next buffer", silent = true })
+	map("n", "]b", "<Plug>(CybuNext)", { desc = "Previous buffer", silent = true })
+	vim.keymap.set({ "n", "v" }, "<M-Tab>", "<plug>(CybuLastusedPrev)")
+	vim.keymap.set({ "n", "v" }, "<M-S-Tab>", "<plug>(CybuLastusedNext)")
 
 	--------------
 	-- 全文搜索 --
@@ -102,9 +109,9 @@ M.config = function()
 	map("i", "jk", "<C-[>")
 	map("n", ">", ">>")
 	map("n", "<", "<<")
-  map("i", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
+	map("i", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
 	map("n", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
-  map("i", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>")
+	map("i", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>")
 	map("n", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>")
 	map("i", "<C-j>", "<End><CR>")
 	map("n", "<C-j>", "<CMD>put =repeat(nr2char(10), v:count1)<CR>")
@@ -172,13 +179,13 @@ M.config = function()
 		["<C-d>"] = nil,
 		["<C-k>"] = cmp.mapping.scroll_docs(-4),
 		["<C-j>"] = cmp.mapping.scroll_docs(4),
-		-- ["<CR>"] = cmp.mapping(function(fallback)
-		-- 	if cmp.visible() then
-		-- 		cmp.confirm(lvim.builtin.cmp.confirm_opts)
-		-- 	else
-		-- 		fallback()
-		-- 	end
-		-- end),
+		["<CR>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.confirm(lvim.builtin.cmp.confirm_opts)
+			else
+				fallback()
+			end
+		end),
 		-- ["<Tab>"] = cmp.mapping(function(fallback)
 		-- 	if cmp.visible() then
 		-- 		if luasnip.expandable() and cmp.get_active_entry() == nil then

@@ -35,7 +35,7 @@ M.config = function()
   vim.opt.wildignorecase = true
   vim.opt.colorcolumn = "80"
   vim.opt.relativenumber = true
-  vim.opt.clipboard = ""
+  vim.opt.clipboard = "unnamedplus"
   vim.opt.completeopt = { "menu", "menuone", "noselect" }
   vim.opt.diffopt = {
     "internal",

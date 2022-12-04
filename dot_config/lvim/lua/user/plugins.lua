@@ -404,6 +404,19 @@ M.config = function()
 				})
 			end,
 		},
+		-- Buffer Jump
+		{
+			"ghillb/cybu.nvim",
+			branch = "main", -- timely updates
+			requires = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" }, -- optional for icon support
+			config = function()
+				local ok, cybu = pcall(require, "cybu")
+				if not ok then
+					return
+				end
+				cybu.setup()
+			end,
+		},
 	}
 end
 

@@ -84,6 +84,9 @@ M.config = function()
 			end,
 			icon = { " ", color = { fg = "#ddd" } },
 			cond = require("lvim.core.lualine.conditions").hide_in_width,
+			on_click = function()
+				vim.cmd([[LspInfo]])
+			end,
 		},
 		components.filetype,
 		{ "fileformat", color = { fg = "#c2e7f0" } },
