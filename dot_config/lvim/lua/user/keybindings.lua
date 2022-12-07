@@ -24,8 +24,8 @@ M.config = function()
 	--------------
 	-- 窗口(widnows)管理 --
 	--------------
-	map("n", "<M-k>", ":resize +2<CR>")
-	map("n", "<M-j>", ":resize -2<CR>")
+  map("n", "<M-K>", ":resize +2<CR>")
+	map("n", "<M-J>", ":resize -2<CR>")
 	map("n", "<M-]>", ":vertical resize -2<CR>")
 	map("n", "<M-[>", ":vertical resize +2<CR>")
 	map("n", "_", ":sp<CR>")
@@ -176,9 +176,9 @@ M.config = function()
 	local lccm = require("lvim.core.cmp").methods
 	lvim.builtin.cmp.mapping = cmp.mapping.preset.insert({
 		["<C-f>"] = nil,
-		["<C-d>"] = nil,
-		["<C-k>"] = cmp.mapping.scroll_docs(-4),
-		["<C-j>"] = cmp.mapping.scroll_docs(4),
+		-- ["<C-d>"] = nil,
+		["<C-u>"] = cmp.mapping.scroll_docs(-4),
+		["<C-d>"] = cmp.mapping.scroll_docs(4),
 		["<CR>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.confirm(lvim.builtin.cmp.confirm_opts)

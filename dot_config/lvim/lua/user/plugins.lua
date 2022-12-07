@@ -249,7 +249,7 @@ M.config = function()
 				require("user.config.scrollbar").config()
 			end,
 		},
-		-- TODO: 必须使用命令才会显示，不会自动加载
+		-- FIXME: 缩略进度条 必须使用命令才会显示，不会自动加载
 		{
 			"wfxr/minimap.vim",
 			run = "cargo install --locked code-minimap",
@@ -310,6 +310,16 @@ M.config = function()
 			"kosayoda/nvim-lightbulb",
 			requires = "antoinemadec/FixCursorHold.nvim",
 		},
+		{
+			"folke/noice.nvim",
+			config = function()
+				require("user.config.noice").config()
+			end,
+			requires = {
+				"MunifTanjim/nui.nvim",
+				"rcarriga/nvim-notify",
+			},
+		},
 		--------------
 		-- 界面美化 --
 		--------------
@@ -347,15 +357,15 @@ M.config = function()
 				return (_time.hour >= 0 and _time.hour < 15)
 			end,
 		},
-		{
-			"rcarriga/nvim-notify",
-			setup = function()
-				require("user.setup.nvim-notify").setup()
-			end,
-			config = function()
-				require("user.config.telescope-notify").config()
-			end,
-		},
+		-- {
+		-- 	"rcarriga/nvim-notify",
+		-- 	setup = function()
+		-- 		require("user.setup.nvim-notify").setup()
+		-- 	end,
+		-- 	config = function()
+		-- 		require("user.config.telescope-notify").config()
+		-- 	end,
+		-- },
 		--------------
 		-- 其他功能 --
 		--------------
