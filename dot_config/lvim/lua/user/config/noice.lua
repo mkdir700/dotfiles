@@ -38,6 +38,9 @@ M.config = function()
 			signature = {
 				enabled = false,
 			},
+      hover = {
+        enabled = false,
+      }
 		},
 		-- you can enable a preset for easier configuration
 		presets = {

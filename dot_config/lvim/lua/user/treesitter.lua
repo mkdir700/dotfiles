@@ -3,7 +3,7 @@ local M = {}
 M.config = function()
 	vim.wo.foldmethod = "expr"
 	vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-	vim.wo.foldlevel = 4
+	vim.wo.foldlevel = 3
 	vim.wo.foldtext =
 		[[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
 	vim.wo.foldnestmax = 3
@@ -28,18 +28,22 @@ M.config = function()
 		goto_next_start = {
 			["]f"] = "@function.outer",
 			["]]"] = "@class.outer",
+      ["]a"] = "@parameter.outer",
 		},
 		goto_next_end = {
 			["]F"] = "@function.outer",
 			["]["] = "@class.outer",
+      ["]A"] = "@parameter.outer",
     },
 		goto_previous_start = {
 			["[f"] = "@function.outer",
 			["[["] = "@class.outer",
+      ["[a"] = "@parameter.outer",
 		},
 		goto_previous_end = {
 			["[F"] = "@function.outer",
 			["[]"] = "@class.outer",
+      ["[A"] = "@parameter.outer",
 		},
 	}
 	lvim.builtin.treesitter.textobjects.swap = {
@@ -77,6 +81,7 @@ M.config = function()
 		"toml",
 		"comment",
 		"regex",
+    "rust",
 		"dockerfile",
 	}
 end

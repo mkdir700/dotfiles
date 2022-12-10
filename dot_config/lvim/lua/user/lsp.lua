@@ -3,6 +3,7 @@ local M = {}
 M.config = function()
 	-- ---WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 	-- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
+
 	require("lvim.lsp.null-ls.linters").setup({
 		{ filetypes = { "sh" }, command = "shellcheck" },
 		{ filetypes = { "go" }, command = "golangci_lint" },
@@ -11,6 +12,7 @@ M.config = function()
 		{ filetypes = { "html" }, command = "tidy" },
 		{ filetypes = { "css" }, command = "stylelint" },
 		{ filetypes = { "markdown" }, command = "markdownlint", args = { "--disable", "MD013" } },
+		-- { filetype = { "rust" }, command = "cargo", args = { "clippy", "--message-format=json" } },
 	})
 
 	lvim.format_on_save = { pattern = "*", timeout = 2000 }
@@ -18,6 +20,7 @@ M.config = function()
 		{ filetypes = { "sh" }, command = "shfmt", extra_args = { "-i", "2" } },
 		{ filetypes = { "cmake" }, command = "cmake_format" },
 		{ filetypes = { "go" }, command = "gofmt" },
+		{ filetypes = { "python" }, command = "isort" },
 		{
 			filetypes = { "python" },
 			command = "black",

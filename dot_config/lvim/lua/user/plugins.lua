@@ -215,6 +215,9 @@ M.config = function()
 			ft = { "markdown" },
 			run = "yay -S glow",
 		},
+		{
+			"HallerPatrick/py_lsp.nvim",
+		},
 		-- 文档
 		{
 			"danymat/neogen",
@@ -307,10 +310,6 @@ M.config = function()
 			end,
 		},
 		{
-			"kosayoda/nvim-lightbulb",
-			requires = "antoinemadec/FixCursorHold.nvim",
-		},
-		{
 			"folke/noice.nvim",
 			config = function()
 				require("user.config.noice").config()
@@ -336,7 +335,7 @@ M.config = function()
 			branch = "feat/local",
 			config = function()
 				require("user.config.tokyonight").config()
-				vim.cmd([[colorscheme tokyonight]])
+				vim.cmd([[colorscheme tokyonight-moon]])
 				lvim.builtin.lualine.options.theme = "tokyonight"
 			end,
 			cond = function()
@@ -357,15 +356,6 @@ M.config = function()
 				return (_time.hour >= 0 and _time.hour < 15)
 			end,
 		},
-		-- {
-		-- 	"rcarriga/nvim-notify",
-		-- 	setup = function()
-		-- 		require("user.setup.nvim-notify").setup()
-		-- 	end,
-		-- 	config = function()
-		-- 		require("user.config.telescope-notify").config()
-		-- 	end,
-		-- },
 		--------------
 		-- 其他功能 --
 		--------------
@@ -374,6 +364,7 @@ M.config = function()
 			cmd = { "Translate*" },
 			setup = function()
 				require("user.setup.translator").setup()
+
 			end,
 		},
 		{
@@ -425,6 +416,13 @@ M.config = function()
 					return
 				end
 				cybu.setup()
+			end,
+		},
+		-- 窗口跳转
+		{
+			"beauwilliams/focus.nvim",
+			config = function()
+				require("focus").setup()
 			end,
 		},
 	}

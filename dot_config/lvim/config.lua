@@ -35,6 +35,10 @@ lvim.builtin.telescope.defaults.mappings = {
 	n = {},
 }
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, { focusable = true }
+)
+
 require("user.treesitter").config()
 
 require("user.lsp").config()
@@ -46,3 +50,4 @@ require("user.keybindings").config()
 require("user.config.toggleterm").config()
 
 require("user.telescope").config()
+

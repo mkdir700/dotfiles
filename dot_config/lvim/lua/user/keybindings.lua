@@ -24,7 +24,7 @@ M.config = function()
 	--------------
 	-- 窗口(widnows)管理 --
 	--------------
-  map("n", "<M-K>", ":resize +2<CR>")
+	map("n", "<M-K>", ":resize +2<CR>")
 	map("n", "<M-J>", ":resize -2<CR>")
 	map("n", "<M-]>", ":vertical resize -2<CR>")
 	map("n", "<M-[>", ":vertical resize +2<CR>")
@@ -65,7 +65,7 @@ M.config = function()
 	map("n", "mg", "<Plug>BookmarkMoveToLine", { noremap = false })
 	map("n", "]g", "<CMD>Gitsigns next_hunk<CR>")
 	map("n", "[g", "<CMD>Gitsigns prev_hunk<CR>")
-  -- 测试用例跳转
+	-- 测试用例跳转
 	map(
 		"n",
 		"]n",
@@ -78,10 +78,10 @@ M.config = function()
 		"<CMD>lua require('neotest').jump.prev({ status = 'failed' })<CR>",
 		{ desc = "Previous failed testcase", silent = true }
 	)
-  -- Todo 标签跳转
+	-- Todo 标签跳转
 	map("n", "]t", "<CMD>lua require('todo-comments').jump_next()<CR>", { desc = "Next todo comments" })
 	map("n", "[t", "<CMD>lua require('todo-comments').jump_prev()<CR>", { desc = "Previous todo comments" })
-  -- 缓冲区(buffer)跳转
+	-- 缓冲区(buffer)跳转
 	map("n", "[b", "<Plug>(CybuPrev)", { desc = "Next buffer", silent = true })
 	map("n", "]b", "<Plug>(CybuNext)", { desc = "Previous buffer", silent = true })
 	vim.keymap.set({ "n", "v" }, "<M-Tab>", "<plug>(CybuLastusedPrev)")
@@ -96,11 +96,25 @@ M.config = function()
 	-- plugin: nvim-spectre
 	map("n", "n", "'Nn'[v:searchforward]", { expr = true })
 	map("n", "N", "'nN'[v:searchforward]", { expr = true })
-	map("n", "<C-l>", "<CMD>nohl<CR><C-l>")
+	map("n", "<M-l>", "<CMD>nohl<CR><C-l>")
 	map("c", "<M-W>", "\\<\\><Left><Left>")
 	map("c", "<M-r>", "\\v")
 	map("c", "<M-c>", "\\C")
 	map("n", "<C-f>", "<CMD>Telescope current_buffer_fuzzy_find<CR>")
+	map("v", "<C-f>", "y<ESC>:Telescope current_buffer_fuzzy_find default_text=<c-r>0<CR>")
+	map("n", "<C-s>", "<CMD>Telescope lsp_document_symbols<CR>")
+	map("v", "<C-s>", "y<ESC>:Telescope lsp_document_symbols default_text=<c-r>0<CR>")
+	map("n", "<C-t>", "<CMD>Telescope lsp_workspace_symbols<CR>")
+	map("v", "<C-t>", "y<ESC>:Telescope lsp_workspace_symbols default_text=<c-r>0<CR>")
+	lvim.builtin.which_key.vmappings.s = {
+		name = "Search",
+		f = { "y<ESC>:Telescope find_files default_text=<c-r>0<CR>", "Find File" },
+		h = { "y<ESC>:Telescope help_tags default_text=<c-r>0<CR>", "Find Help" },
+		R = { "y<ESC>:Telescope registers default_text=<c-r>0<CR>", "Registers" },
+		t = { "y<ESC>:Telescope live_grep default_text=<c-r>0<CR>", "Text" },
+		k = { "y<ESC>:Telescope keymaps default_text=<c-r>0<CR>", "Keymaps" },
+		C = { "y<ESC>:Telescope commands default_text=<c-r>0<CR>", "Commands" },
+	}
 
 	--------------
 	-- 快速编辑(Edit) --
@@ -113,11 +127,10 @@ M.config = function()
 	map("n", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
 	map("i", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>")
 	map("n", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>")
-	map("i", "<C-j>", "<End><CR>")
-	map("n", "<C-j>", "<CMD>put =repeat(nr2char(10), v:count1)<CR>")
 	map("i", "<C-k>", "repeat('<Del>', strchars(getline('.')) - getcurpos()[2] + 1)", { expr = true })
 	map("c", "<C-k>", "repeat('<Del>', strchars(getcmdline()) - getcmdpos() + 1)", { expr = true })
-	map("i", "<C-l>", "<CMD>call C_Right()<CR><Right>")
+	-- 向右边跳转一个单词
+	-- map("i", "<C-l>", "<CMD>call C_Right()<CR><Right>")
 	map("c", "<C-l>", "<C-Right>")
 	map("i", "<C-z>", "<CMD>undo<CR>")
 	map("i", "<c-s-z>", "<cmd>redo<cr>")
@@ -208,17 +221,33 @@ M.config = function()
 	map("n", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
 	map("i", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
 	map("n", "<F2>", "<CMD>lua vim.lsp.buf.rename()<CR>")
+  -- 给出代码建议
 	map("n", "<M-.>", "<CMD>lua vim.lsp.buf.code_action()<CR>")
-	map("n", "<C-_>", "gcc", { noremap = false })
-	map("v", "<C-_>", "<Plug>(comment_toggle_linewise_visual)", { noremap = false })
-	map("i", "<C-_>", "<CMD>normal gcc<CR>")
-	map("n", "<C-S-O>", "<CMD>Telescope lsp_document_symbols<CR>")
-	map("n", "<C-t>", "<CMD>Telescope lsp_workspace_symbols<CR>")
-	map("n", "<M-LeftMouse>", "<LeftMouse><CMD>lua vim.lsp.buf.definition()<CR>")
+  -- 代码注释
+	map("n", "<C-/>", "gcc", { noremap = false })
+	map("v", "<C-/>", "<Plug>(comment_toggle_linewise_visual)", { noremap = false })
+	map("i", "<C-/>", "<CMD>normal gcc<CR>")
 	map("n", "[e", "<CMD>lua vim.diagnostic.goto_prev()<CR>")
 	map("n", "]e", "<CMD>lua vim.diagnostic.goto_next()<CR>")
+  -- 使用 Trouble 插件展示引用信息
+	map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
+  -- 为函数添加注释
 	lvim.builtin.which_key.mappings.l.g = { "<CMD>Neogen func<CR>", "Func Doc" }
+  -- 为类添加注释
 	lvim.builtin.which_key.mappings.l.G = { "<CMD>Neogen class<CR>", "Class Doc" }
+	-- lvim.builtin.which_key.mappings.l.x = { "<cmd>TroubleToggle<cr>", "Trouble", { silent = true, noremap = true } }
+  -- 展示当前文件的问题
+	lvim.builtin.which_key.mappings.l.x =
+		{ "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble", { silent = true, noremap = true } }
+  -- 展示当前工作区的问题
+	lvim.builtin.which_key.mappings.l.X =
+		{ "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble", { silent = true, noremap = true } }
+	-- vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
+	--   {silent = true, noremap = true}
+	-- )
+	-- vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
+	--   {silent = true, noremap = true}
+	-- )
 
 	--------------
 	-- 文件(File)操作 --
@@ -234,11 +263,10 @@ M.config = function()
 	-- map("n", "<C-k>w", "<CMD>%bd<CR>")
 	-- map("n", "<C-w>z", "<CMD>lua require('user.keybindings').zoom_current_window()<CR>")
 	-- map("n", "<M-s>", "<CMD>SudaWrite<CR>")
-	map("n", "<C-s>", "<CMD>w<CR>")
-	map("n", "<C-S-S>", ":saveas <C-r>=fnamemodify('.',':p')<CR>")
+	-- lvim.builtin.which_key.mappings["<Tab>"] = { ":try | b# | catch | endtry<CR>", "Switch Buffer" }
+	-- map("n", "<C-S-S>", ":saveas <C-r>=fnamemodify('.',':p')<CR>")
 	map("n", "<Tab>", "<CMD>wincmd w<CR>")
 	map("n", "<S-Tab>", "<CMD>wincmd W<CR>")
-	lvim.builtin.which_key.mappings["<Tab>"] = { ":try | b# | catch | endtry<CR>", "Switch Buffer" }
 	lvim.builtin.which_key.mappings["k"] = {
 		name = "文件操作",
 		n = { "<CMD>enew<CR>", "新建文件" },
@@ -274,11 +302,9 @@ M.config = function()
 	-- plugin: trouble.nvim
 	-- plugin: nvim-bqf
 	-- map("n", "<C-M-E>", "<CMD>NvimTreeFindFile<CR>")
-	-- map("n", "<C-S-M>", "<CMD>Trouble workspace_diagnostics<CR>")
 	-- map("n", "<C-S-U>", "<CMD>lua require('telescope').extensions.notify.notify()<CR>")
 	lvim.builtin.which_key.mappings["a"] = {
 		name = "Application",
-		e = { "<CMD>NvimTreeFindFile<CR>", "Explorer" },
 		o = { "<CMD>SymbolsOutline<CR>", "Outline" },
 		t = { "<CMD>TodoTrouble<CR>", "TODO" },
 		u = { "<CMD>UndotreeToggle<CR>", "UndoTree" },
@@ -288,21 +314,18 @@ M.config = function()
 	--------------
 	-- 其他按键 --
 	--------------
-	-- map("n", "<M-e>", "<CMD>call Open_file_in_explorer()<CR>")
 	-- map("n", "<M-z>", "<CMD>let &wrap=!&wrap<CR>")
 	-- map("n", "<M-t>", "<CMD>TranslateW<CR>")
 	-- map("v", "<M-t>", ":TranslateW<CR>")
 	-- map("n", "<M-T>", "<CMD>TranslateR<CR>")
 	-- map("v", "<M-T>", ":TranslateR<CR>")
-	-- map("n", "<C-S-P>", "<CMD>Telescope commands<CR>")
 	-- map("n", "<C-k><C-s>", "<CMD>Telescope keymaps<CR>")
+	map("n", "<M-e>", "<CMD>NvimTreeToggle<CR>")
+	map("n", "<C-S-P>", "<CMD>Telescope commands<CR>")
 	lvim.builtin.which_key.mappings[";"] = nil
 	lvim.builtin.which_key.mappings["/"] = nil
 	lvim.builtin.which_key.mappings["h"] = nil
-	lvim.builtin.which_key.mappings["f"] = nil
 	lvim.builtin.which_key.mappings["e"] = nil
-	-- lvim.builtin.which_key.mappings["w"] = nil
-	-- lvim.builtin.which_key.mappings["c"] = nil
 
 	vim.cmd([[
 function! C_Right() abort

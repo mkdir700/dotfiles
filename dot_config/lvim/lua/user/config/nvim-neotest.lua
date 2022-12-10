@@ -30,14 +30,14 @@ M.config = function()
 
 	lvim.builtin.which_key.mappings.t = {
 		name = "Run Tests",
-		r = { "<CMD>lua require('neotest').run.run()<CR>", "运行当前测试用例" },
-		R = { "<CMD>lua require('neotest').run.run({strategy = 'dap'})<CR>", "运行当前测试用例(DEBUG)" },
+		t = { "<CMD>lua require('neotest').run.run()<CR>", "运行当前测试用例" },
+		d = { "<CMD>lua require('neotest').run.run({strategy = 'dap'})<CR>", "运行当前测试用例(DEBUG)" },
     l = { "<CMD>lua require('neotest').run.run_last()<CR>", "运行最近测试用例" },
     L = { "<CMD>lua require('neotest').run.run_last({strategy = 'dap'})<CR>", "运行最近测试用例(DEBUG)" },
 		f = { "<CMD>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "运行当前文件" },
 		s = { "<CMD>lua require('neotest').summary.toggle()<CR>", "查看测试概要" },
 		S = { "<CMD>lua require('neotest').run.stop()<CR>", "停止" },
-    o = { "<CMD>lua require('neotest').output.toggle()<CR>", "查看输出" },
+    o = { "<CMD>lua require('neotest').output.open()<CR>", "查看输出" },
     p = { "<CMD>lua require('neotest').output_panel.toggle()<CR>", "输出面板" }
 	}
 end
