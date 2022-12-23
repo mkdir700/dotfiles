@@ -30,6 +30,41 @@ M.config = function()
 		{ filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }, command = "prettier" },
 		{ filetypes = { "html", "css", "markdown" }, command = "prettier" },
 	})
+
+	-- 重新定义 lsp 的默认配置
+	local attach = require("lvim.lsp").common_on_attach
+	require("lvim.lsp").common_on_attach = function(client, bufnr)
+		require("lsp_signature").on_attach({
+			doc_lines = 10,
+			floating_window = false,
+			floating_window_above_cur_line = false,
+			hint_enable = true,
+			hint_prefix = " ",
+			extra_trigger_chars = { "(", ",", "=" }, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
+			zindex = 1002, -- by default it will be on top of all floating windows, set to 50 send it to bottom
+			toggle_key = "<C-k>",
+			"/home/",
+		})
+
+		attach(client, bufnr)
+	end
+
+	local lspconfig = require("lspconfig")
+	local python_root_files = {
+		"pyproject.toml",
+		"setup.py",
+		"setup.cfg",
+		"requirements.txt",
+		"Pipfile",
+		"pyrightconfig.json",
+		"Makefile",
+		".git",
+		".mypy_cache",
+	}
+	lspconfig["pyright"].setup({
+		on_attach = attach,
+		root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
+	})
 end
 
 return M

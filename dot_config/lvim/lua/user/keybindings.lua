@@ -18,8 +18,10 @@ M.config = function()
 	-- 终端(terminal)管理 --
 	--------------
 	map("t", "<C-q>[", "<C-\\><C-n>")
+	map("t", "<esc>", "<C-\\><C-n>")
 	map("t", "<C-h>", "<BS>")
-	map("t", "<C-k>", "<ESC>d$a<BS><BS>")
+  map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
+	-- map("t", "<C-k>", "<ESC>d$a<BS><BS>")
 
 	--------------
 	-- 窗口(widnows)管理 --
@@ -84,6 +86,8 @@ M.config = function()
 	-- 缓冲区(buffer)跳转
 	map("n", "[b", "<Plug>(CybuPrev)", { desc = "Next buffer", silent = true })
 	map("n", "]b", "<Plug>(CybuNext)", { desc = "Previous buffer", silent = true })
+	map("n", "[e", "<CMD>lua vim.diagnostic.goto_prev()<CR>")
+	map("n", "]e", "<CMD>lua vim.diagnostic.goto_next()<CR>")
 	vim.keymap.set({ "n", "v" }, "<M-Tab>", "<plug>(CybuLastusedPrev)")
 	vim.keymap.set({ "n", "v" }, "<M-S-Tab>", "<plug>(CybuLastusedNext)")
 
@@ -130,7 +134,7 @@ M.config = function()
 	map("i", "<C-k>", "repeat('<Del>', strchars(getline('.')) - getcurpos()[2] + 1)", { expr = true })
 	map("c", "<C-k>", "repeat('<Del>', strchars(getcmdline()) - getcmdpos() + 1)", { expr = true })
 	-- 向右边跳转一个单词
-	-- map("i", "<C-l>", "<CMD>call C_Right()<CR><Right>")
+	-- map("n", "<C-l>", "<CMD>call C_Right()<CR><Right>")
 	map("c", "<C-l>", "<C-Right>")
 	map("i", "<C-z>", "<CMD>undo<CR>")
 	map("i", "<c-s-z>", "<cmd>redo<cr>")
@@ -156,7 +160,7 @@ M.config = function()
 	--------------
 	-- 复制粘贴 --
 	--------------
-	map("i", "<C-v>", "<C-r>+")
+	-- map("i", "<C-v>", "<C-r>+")
 	map("n", "Y", "y$")
 	map("v", "=p", '"0p')
 	map("n", "=p", '"0p')
@@ -189,7 +193,6 @@ M.config = function()
 	local lccm = require("lvim.core.cmp").methods
 	lvim.builtin.cmp.mapping = cmp.mapping.preset.insert({
 		["<C-f>"] = nil,
-		-- ["<C-d>"] = nil,
 		["<C-u>"] = cmp.mapping.scroll_docs(-4),
 		["<C-d>"] = cmp.mapping.scroll_docs(4),
 		["<CR>"] = cmp.mapping(function(fallback)
@@ -221,25 +224,23 @@ M.config = function()
 	map("n", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
 	map("i", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
 	map("n", "<F2>", "<CMD>lua vim.lsp.buf.rename()<CR>")
-  -- 给出代码建议
+	-- 给出代码建议
 	map("n", "<M-.>", "<CMD>lua vim.lsp.buf.code_action()<CR>")
-  -- 代码注释
+	-- 代码注释
 	map("n", "<C-/>", "gcc", { noremap = false })
 	map("v", "<C-/>", "<Plug>(comment_toggle_linewise_visual)", { noremap = false })
 	map("i", "<C-/>", "<CMD>normal gcc<CR>")
-	map("n", "[e", "<CMD>lua vim.diagnostic.goto_prev()<CR>")
-	map("n", "]e", "<CMD>lua vim.diagnostic.goto_next()<CR>")
-  -- 使用 Trouble 插件展示引用信息
+	-- 使用 Trouble 插件展示引用信息
 	map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
-  -- 为函数添加注释
+	-- 为函数添加注释
 	lvim.builtin.which_key.mappings.l.g = { "<CMD>Neogen func<CR>", "Func Doc" }
-  -- 为类添加注释
+	-- 为类添加注释
 	lvim.builtin.which_key.mappings.l.G = { "<CMD>Neogen class<CR>", "Class Doc" }
 	-- lvim.builtin.which_key.mappings.l.x = { "<cmd>TroubleToggle<cr>", "Trouble", { silent = true, noremap = true } }
-  -- 展示当前文件的问题
+	-- 展示当前文件的问题
 	lvim.builtin.which_key.mappings.l.x =
 		{ "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble", { silent = true, noremap = true } }
-  -- 展示当前工作区的问题
+	-- 展示当前工作区的问题
 	lvim.builtin.which_key.mappings.l.X =
 		{ "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble", { silent = true, noremap = true } }
 	-- vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
@@ -309,7 +310,12 @@ M.config = function()
 		t = { "<CMD>TodoTrouble<CR>", "TODO" },
 		u = { "<CMD>UndotreeToggle<CR>", "UndoTree" },
 		c = { "<CMD>Calc<CR>", "Calculator" },
+		i = { "<CMD>Autoflake<CR>", "AutoFlake" },
 	}
+  lvim.builtin.which_key.vmappings.a = {
+		name = "Application",
+  }
+	lvim.builtin.which_key.mappings["E"] = { "<CMD>NvimTreeFocus<CR>", "Explorer Focus" }
 
 	--------------
 	-- 其他按键 --
@@ -325,7 +331,7 @@ M.config = function()
 	lvim.builtin.which_key.mappings[";"] = nil
 	lvim.builtin.which_key.mappings["/"] = nil
 	lvim.builtin.which_key.mappings["h"] = nil
-	lvim.builtin.which_key.mappings["e"] = nil
+	lvim.builtin.which_key.mappings["e"] = nil  -- FIXME: 没有效果
 
 	vim.cmd([[
 function! C_Right() abort

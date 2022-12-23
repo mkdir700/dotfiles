@@ -77,6 +77,44 @@ M.config = function()
 				require("user.config.telescope-vim-bookmarks").config()
 			end,
 		},
+		-- 预览
+		{
+			"rmagatti/goto-preview",
+			config = function()
+				require("goto-preview").setup({})
+				vim.api.nvim_set_keymap(
+					"n",
+					"gp",
+					"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+					{ noremap = true }
+				)
+				-- vim.keymap.set(
+				-- 	"n",
+				-- 	"gpd",
+				-- 	"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+				-- 	{ silent = true }
+				-- )
+				-- vim.keymap.set(
+				-- 	"n",
+				-- 	"gpt",
+				-- 	"<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",
+				-- 	{ silent = true }
+				-- )
+				-- vim.keymap.set(
+				-- 	"n",
+				-- 	"gpi",
+				-- 	'<cmd>lua require("goto-preview").goto_preview_implementation()<CR>',
+				-- 	{ silent = true }
+				-- )
+				-- vim.keymap.set("n", "gpp", "<cmd>lua require('goto-preview').close_all_win()<CR>", { silent = true })
+				-- vim.keymap.set(
+				-- 	"n",
+				-- 	"gpr",
+				-- 	"<cmd> lua require('goto-preview').goto_preview_references()<CR>",
+				-- 	{ silent = true }
+				-- )
+			end,
+		},
 		--------------
 		-- 全文搜索 --
 		--------------
@@ -124,6 +162,13 @@ M.config = function()
 		},
 		{
 			"dkarter/bullets.vim",
+		},
+		-- 用于从远程终端复制到本地
+		{
+			"ojroques/vim-oscyank",
+			config = function()
+				lvim.builtin.which_key.vmappings["y"] = { ":OSCYank<CR>", "Copy to clipboard(Remote)" }
+			end,
 		},
 		--------------
 		-- 普通模式 --
@@ -215,9 +260,6 @@ M.config = function()
 			ft = { "markdown" },
 			run = "yay -S glow",
 		},
-		{
-			"HallerPatrick/py_lsp.nvim",
-		},
 		-- 文档
 		{
 			"danymat/neogen",
@@ -227,6 +269,29 @@ M.config = function()
 			cmd = { "Neogen" },
 			module = "neogen",
 			disable = false,
+		},
+		-- 切换 python 虚拟环境
+		{
+			"AckslD/swenv.nvim",
+			config = function()
+				require("swenv").setup({
+					-- Should return a list of tables with a `name` and a `path` entry each.
+					-- Gets the argument `venvs_path` set below.
+					-- By default just lists the entries in `venvs_path`.
+					get_venvs = function(venvs_path)
+						return require("swenv.api").get_venvs(venvs_path)
+					end,
+					-- Path passed to `get_venvs`.
+					venvs_path = vim.fn.expand("~/venvs"),
+					-- Something to do after setting an environment
+					post_set_venv = nil,
+				})
+			end,
+		},
+		-- 清除未使用的库
+		{
+			"tenfyzhong/autoflake.vim",
+			run = "pip install autoflake",
 		},
 		--------------
 		-- 文件操作 --
@@ -364,7 +429,6 @@ M.config = function()
 			cmd = { "Translate*" },
 			setup = function()
 				require("user.setup.translator").setup()
-
 			end,
 		},
 		{
