@@ -65,6 +65,9 @@ M.config = function()
 		on_attach = attach,
 		root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
 	})
+
+	-- 重写 lvim.lsp 的默认配置
+	lvim.lsp.diagnostics.float.focusable = true
 end
 
 return M

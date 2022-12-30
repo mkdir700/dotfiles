@@ -489,6 +489,22 @@ M.config = function()
 				require("focus").setup()
 			end,
 		},
+		-- Python 虚拟环境
+		{
+			"jmcantrell/vim-virtualenv",
+		},
+		-- Session 会话管理
+		{
+
+			"olimorris/persisted.nvim",
+			--module = "persisted", -- For lazy loading
+			config = function()
+				require("persisted").setup({
+					command = "VimLeavePre",
+				})
+				require("telescope").load_extension("persisted") -- To load the telescope extension
+			end,
+		},
 	}
 end
 

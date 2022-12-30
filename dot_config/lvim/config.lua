@@ -9,16 +9,14 @@ lvim.builtin.bufferline.options.always_show_bufferline = true
 
 require("user.statusline").config()
 
-lvim.builtin.terminal.shell = "/opt/homebrew/bin/fish"
-lvim.builtin.terminal.active = true
+-- lvim.builtin.terminal.shell = "/opt/homebrew/bin/fish"
+-- lvim.builtin.terminal.active = true
 -- lvim.builtin.terminal.open_mapping = "<M-Space>" -- ctrl+`
 lvim.builtin.nvimtree.setup.view.mappings.list = {
-	-- { key = { "<Tab>" }, action = nil },
-  { key = { "l", "<CR>" }, action = "edit", mode = "n" },
+	{ key = { "l", "<CR>" }, action = "edit", mode = "n" },
 	{ key = "h", action = "close_node" },
 	{ key = "v", action = "vsplit" },
 }
-
 
 ----------------------------------------
 -- Telescope
@@ -35,9 +33,7 @@ lvim.builtin.telescope.defaults.mappings = {
 	n = {},
 }
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, { focusable = true }
-)
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { focusable = true })
 
 require("user.treesitter").config()
 
@@ -50,4 +46,3 @@ require("user.keybindings").config()
 require("user.config.toggleterm").config()
 
 require("user.telescope").config()
-

@@ -13,14 +13,28 @@ M.config = function()
 	-- 屏幕(screen)滚动 --
 	--------------
 	-- plugin: neoscroll.nvim
+	--------------------
+	-- 会话持久化管理 --
+	--------------------
+	lvim.builtin.which_key.mappings.s.s = {
+		":Telescope persisted<CR>",
+		"View Sessions",
+	}
+	lvim.builtin.which_key.mappings["S"] = {
+		name = "会话管理",
+		l = { "<CMD>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
+		c = { "<CMD>lua require('persistence').load()<cr>", "Restore last session for current dir" },
+		q = { "<CMD>lua require('persistence').stop()<cr>", "Quit without saving session" },
+		s = { ":Telescope persisted<CR>", "View Sessions" },
+	}
 
 	--------------
 	-- 终端(terminal)管理 --
 	--------------
 	map("t", "<C-q>[", "<C-\\><C-n>")
-	map("t", "<esc>", "<C-\\><C-n>")
+	map("t", "<S-Esc>", "<C-\\><C-n>")
 	map("t", "<C-h>", "<BS>")
-  map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
+	map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
 	-- map("t", "<C-k>", "<ESC>d$a<BS><BS>")
 
 	--------------
@@ -202,23 +216,23 @@ M.config = function()
 				fallback()
 			end
 		end),
-		-- ["<Tab>"] = cmp.mapping(function(fallback)
-		-- 	if cmp.visible() then
-		-- 		if luasnip.expandable() and cmp.get_active_entry() == nil then
-		-- 			cmp.confirm(lvim.builtin.cmp.confirm_opts)
-		-- 		end
-		-- 	elseif luasnip.expandable() then
-		-- 		luasnip.expand()
-		-- 	elseif lccm.jumpable() then
-		-- 		luasnip.jump(1)
-		-- 	elseif lccm.check_backspace() then
-		-- 		fallback()
-		-- 	elseif lccm.is_emmet_active() then
-		-- 		return vim.fn["cmp#complete"]()
-		-- 	else
-		-- 		fallback()
-		-- 	end
-		-- end, { "i", "s" }),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				if luasnip.expandable() and cmp.get_active_entry() == nil then
+					cmp.confirm(lvim.builtin.cmp.confirm_opts)
+				end
+			elseif luasnip.expandable() then
+				luasnip.expand()
+			elseif lccm.jumpable() then
+				luasnip.jump(1)
+			elseif lccm.check_backspace() then
+				fallback()
+			elseif lccm.is_emmet_active() then
+				return vim.fn["cmp#complete"]()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 	})
 
 	map("n", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
@@ -227,9 +241,9 @@ M.config = function()
 	-- 给出代码建议
 	map("n", "<M-.>", "<CMD>lua vim.lsp.buf.code_action()<CR>")
 	-- 代码注释
-	map("n", "<C-/>", "gcc", { noremap = false })
-	map("v", "<C-/>", "<Plug>(comment_toggle_linewise_visual)", { noremap = false })
-	map("i", "<C-/>", "<CMD>normal gcc<CR>")
+	map("n", "<C-_>", "gcc", { noremap = false })
+	map("v", "<C-_>", "<Plug>(comment_toggle_linewise_visual)", { noremap = false })
+	map("i", "<C-_>", "<CMD>normal gcc<CR>")
 	-- 使用 Trouble 插件展示引用信息
 	map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
 	-- 为函数添加注释
@@ -284,12 +298,7 @@ M.config = function()
 		-- u = { ":try | %bd | catch | endtry<CR>", "try" }
 	}
 	lvim.builtin.which_key.mappings["q"] = { "<CMD>call SmartClose()<CR>", "退出" }
-	lvim.builtin.which_key.mappings["S"] = {
-		name = "会话管理",
-		l = { "<CMD>lua require('persistence').load({ last = true })<cr>", "Restore last session" },
-		c = { "<CMD>lua require('persistence').load()<cr>", "Restore last session for current dir" },
-		q = { "<CMD>lua require('persistence').stop()<cr>", "Quit without saving session" },
-	}
+	lvim.builtin.which_key.mappings["Q"] = { "<CMD>qa<CR>", "直接退出" }
 
 	--------------
 	-- 界面元素 --
@@ -312,9 +321,9 @@ M.config = function()
 		c = { "<CMD>Calc<CR>", "Calculator" },
 		i = { "<CMD>Autoflake<CR>", "AutoFlake" },
 	}
-  lvim.builtin.which_key.vmappings.a = {
+	lvim.builtin.which_key.vmappings.a = {
 		name = "Application",
-  }
+	}
 	lvim.builtin.which_key.mappings["E"] = { "<CMD>NvimTreeFocus<CR>", "Explorer Focus" }
 
 	--------------
@@ -331,7 +340,7 @@ M.config = function()
 	lvim.builtin.which_key.mappings[";"] = nil
 	lvim.builtin.which_key.mappings["/"] = nil
 	lvim.builtin.which_key.mappings["h"] = nil
-	lvim.builtin.which_key.mappings["e"] = nil  -- FIXME: 没有效果
+	lvim.builtin.which_key.mappings["e"] = nil -- FIXME: 没有效果
 
 	vim.cmd([[
 function! C_Right() abort
