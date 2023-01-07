@@ -217,7 +217,10 @@ M.config = function()
 			end
 		end),
 		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
+			local copilot_keys = vim.fn["copilot#Accept"]()
+			if copilot_keys ~= "" and type(copilot_keys) == "string" then
+				vim.api.nvim_feedkeys(copilot_keys, "i", true)
+			elseif cmp.visible() then
 				if luasnip.expandable() and cmp.get_active_entry() == nil then
 					cmp.confirm(lvim.builtin.cmp.confirm_opts)
 				end
@@ -319,7 +322,7 @@ M.config = function()
 		t = { "<CMD>TodoTrouble<CR>", "TODO" },
 		u = { "<CMD>UndotreeToggle<CR>", "UndoTree" },
 		c = { "<CMD>Calc<CR>", "Calculator" },
-		i = { "<CMD>Autoflake<CR>", "AutoFlake" },
+		i = { "<CMD>Autoflake --remove-all-unused-imports<CR>", "AutoFlake" },
 	}
 	lvim.builtin.which_key.vmappings.a = {
 		name = "Application",
