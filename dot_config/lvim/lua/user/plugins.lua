@@ -493,6 +493,15 @@ M.config = function()
 		{
 			"jmcantrell/vim-virtualenv",
 		},
+		{
+			"rafi/vim-venom",
+			ft = { "python" },
+			config = function()
+				require("venom").setup()
+        -- 重启 LSP 服务后生效
+				vim.cmd([[ LspRestart ]])
+			end,
+		},
 		-- Session 会话管理
 		{
 
@@ -507,7 +516,5 @@ M.config = function()
 		},
 	}
 end
-
--- http://www.baidu.com
 
 return M
