@@ -7,7 +7,7 @@ M.config = function()
 	require("lvim.lsp.null-ls.linters").setup({
 		{ filetypes = { "sh" }, command = "shellcheck" },
 		{ filetypes = { "go" }, command = "golangci_lint" },
-		{ filetypes = { "python" }, command = "mypy", args = { "--ignore-missing-imports" } },
+		-- { filetypes = { "python" }, command = "mypy", args = { "--ignore-missing-imports" } },
 		{ filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }, command = "eslint" },
 		{ filetypes = { "html" }, command = "tidy" },
 		{ filetypes = { "css" }, command = "stylelint" },
@@ -21,11 +21,7 @@ M.config = function()
 		{ filetypes = { "cmake" }, command = "cmake_format" },
 		{ filetypes = { "go" }, command = "gofmt" },
 		{ filetypes = { "python" }, command = "isort" },
-		{
-			filetypes = { "python" },
-			command = "black",
-			-- args = { "--style={based_on_style: google, column_limit: 120, indent_width: 4}" },
-		},
+		{ filetypes = { "python" }, command = "black" },
 		{ filetypes = { "lua" }, command = "stylua" },
 		{ filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }, command = "prettier" },
 		{ filetypes = { "html", "css", "markdown" }, command = "prettier" },
@@ -65,6 +61,52 @@ M.config = function()
 		on_attach = attach,
 		root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
 	})
+	-- Configure `ruff-lsp`.
+	local configs = require("lspconfig.configs")
+	if not configs.ruff_lsp then
+		configs.ruff_lsp = {
+			default_config = {
+				cmd = { "ruff-lsp" },
+				filetypes = { "python" },
+				root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
+				init_options = {
+					settings = {
+						args = {},
+					},
+				},
+			},
+		}
+	end
+  lspconfig["ruff_lsp"].setup({
+		on_attach = attach,
+	})
+	-- require("lspconfig").pylsp.setup({
+	-- 	root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
+	-- 	settings = {
+	-- 		pylsp = {
+	-- 			plugins = {
+	-- 				rope = {
+	-- 					enabled = true,
+	-- 				},
+	-- 				pyflakes = {
+	-- 					enabled = false,
+	-- 				},
+	-- 				pycodestyle = {
+	-- 					enabled = false,
+	-- 				},
+	-- 				ruff = {
+	-- 					enabled = true,
+	-- 				},
+	-- 				mypy = {
+	-- 					enabled = true,
+	-- 				},
+	-- 				mccabe = {
+	-- 					enabled = false,
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 	},
+	-- })
 
 	-- 重写 lvim.lsp 的默认配置
 	lvim.lsp.diagnostics.float.focusable = true
