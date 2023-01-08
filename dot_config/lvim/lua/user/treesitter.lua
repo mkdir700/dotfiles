@@ -20,6 +20,15 @@ M.config = function()
 			["if"] = "@function.inner",
 			["aa"] = "@parameter.outer",
 			["ia"] = "@parameter.inner",
+      ["al"] = "@call.outer",
+      ["il"] = "@call.inner",
+      ["ad"] = "@conditional.outer",
+      ["id"] = "@conditional.inner",
+		},
+		selection_modes = {
+			["@parameter.outer"] = "v", -- charwise
+			["@function.outer"] = "V", -- linewise
+			["@class.outer"] = "<c-v>", -- blockwise
 		},
 	}
 	lvim.builtin.treesitter.textobjects.move = {
@@ -28,22 +37,22 @@ M.config = function()
 		goto_next_start = {
 			["]f"] = "@function.outer",
 			["]]"] = "@class.outer",
-      ["]a"] = "@parameter.outer",
+			["]a"] = "@parameter.outer",
 		},
 		goto_next_end = {
 			["]F"] = "@function.outer",
 			["]["] = "@class.outer",
-      ["]A"] = "@parameter.outer",
-    },
+			["]A"] = "@parameter.outer",
+		},
 		goto_previous_start = {
 			["[f"] = "@function.outer",
 			["[["] = "@class.outer",
-      ["[a"] = "@parameter.outer",
+			["[a"] = "@parameter.outer",
 		},
 		goto_previous_end = {
 			["[F"] = "@function.outer",
 			["[]"] = "@class.outer",
-      ["[A"] = "@parameter.outer",
+			["[A"] = "@parameter.outer",
 		},
 	}
 	lvim.builtin.treesitter.textobjects.swap = {
@@ -81,7 +90,7 @@ M.config = function()
 		"toml",
 		"comment",
 		"regex",
-    "rust",
+		"rust",
 		"dockerfile",
 	}
 end

@@ -195,10 +195,11 @@ M.config = function()
 		{
 			"sgur/vim-textobj-parameter",
 		},
+		-- FIXME: 当前版本选择类或函数，会跳到下一行
 		{
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
-		{ "nvim-treesitter/nvim-treesitter-context" },
+		-- 使用 . 重复上一次的操作
 		{
 			"tpope/vim-repeat",
 		},
@@ -222,30 +223,9 @@ M.config = function()
 				require("user.config.lsp_signature").config()
 			end,
 		},
-		-- {
-		-- 	"benfowler/telescope-luasnip.nvim",
-		-- 	keys = { "<M-i>" },
-		-- 	config = function()
-		-- 		require("user.config.telescope-luasnip").config()
-		-- 	end,
-		-- },
-		-- {
-		-- 	"tamago324/cmp-zsh",
-		-- 	config = function()
-		-- 		require("user.config.cmp_zsh").config()
-		-- 	end,
-		-- 	requires = { "Shougo/deol.nvim" },
-		-- },
-		-- {
-		-- 	"p00f/clangd_extensions.nvim",
-		-- 	ft = { "c", "cpp", "objc", "objcpp" },
-		-- 	config = function()
-		-- 		require("user.config.clangd_extensions").config()
-		-- 	end,
-		-- },
-		-- {
-		-- 	"windwp/nvim-ts-autotag",
-		-- },
+		{
+			"windwp/nvim-ts-autotag",
+		},
 		{
 			"simrat39/rust-tools.nvim",
 			config = function()
@@ -254,7 +234,7 @@ M.config = function()
 		},
 		-- You must install glow globally
 		-- https://github.com/charmbracelet/glow
-		-- yay -S glow
+    -- Markdown 渲染工具
 		{
 			"npxbr/glow.nvim",
 			ft = { "markdown" },
@@ -384,6 +364,8 @@ M.config = function()
 				"rcarriga/nvim-notify",
 			},
 		},
+		-- 上下文展示
+		{ "nvim-treesitter/nvim-treesitter-context" },
 		--------------
 		-- 界面美化 --
 		--------------
@@ -421,6 +403,18 @@ M.config = function()
 				return (_time.hour >= 0 and _time.hour < 15)
 			end,
 		},
+		-- {
+		-- 	"echasnovski/mini.animate",
+		-- 	config = function()
+		-- 		require("mini.animate").setup()
+		-- 	end,
+		-- },
+		-- {
+		-- 	"echasnovski/mini.cursorword",
+		-- 	config = function()
+		-- 		require("mini.cursorword").setup()
+		-- 	end,
+		-- },
 		--------------
 		-- 其他功能 --
 		--------------
@@ -498,7 +492,7 @@ M.config = function()
 			ft = { "python" },
 			config = function()
 				require("venom").setup()
-        -- 重启 LSP 服务后生效
+				-- 重启 LSP 服务后生效
 				vim.cmd([[ LspRestart ]])
 			end,
 		},

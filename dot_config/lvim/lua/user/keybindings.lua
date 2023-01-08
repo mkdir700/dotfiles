@@ -46,6 +46,10 @@ M.config = function()
 	map("n", "<M-[>", ":vertical resize +2<CR>")
 	map("n", "_", ":sp<CR>")
 	map("n", "|", ":vsp<CR>")
+	vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
+	vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
+	vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
+	vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 
 	--------------
 	-- 光标(cursor)移动 --
@@ -133,6 +137,7 @@ M.config = function()
 		k = { "y<ESC>:Telescope keymaps default_text=<c-r>0<CR>", "Keymaps" },
 		C = { "y<ESC>:Telescope commands default_text=<c-r>0<CR>", "Commands" },
 	}
+	lvim.builtin.which_key.mappings.s.n = { ":Telescope notify<CR>", "Notify" }
 
 	--------------
 	-- 快速编辑(Edit) --
@@ -217,27 +222,28 @@ M.config = function()
 			end
 		end),
 		["<Tab>"] = cmp.mapping(function(fallback)
-			local copilot_keys = vim.fn["copilot#Accept"]()
-			if copilot_keys ~= "" and type(copilot_keys) == "string" then
-				vim.api.nvim_feedkeys(copilot_keys, "i", true)
-			elseif cmp.visible() then
+			-- local copilot_keys = vim.fn["copilot#Accept"]()
+			if cmp.visible() then
 				if luasnip.expandable() and cmp.get_active_entry() == nil then
 					cmp.confirm(lvim.builtin.cmp.confirm_opts)
 				end
 			elseif luasnip.expandable() then
-				luasnip.expand()
+				luasnip.expand({})
 			elseif lccm.jumpable() then
 				luasnip.jump(1)
 			elseif lccm.check_backspace() then
 				fallback()
-			elseif lccm.is_emmet_active() then
-				return vim.fn["cmp#complete"]()
+				-- elseif lccm.is_emmet_active() then
+				-- 	return vim.fn["cmp#complete"]()
+				-- elseif copilot_keys ~= "" and type(copilot_keys) == "string" then
+				-- vim.api.nvim_feedkeys(copilot_keys, "i", true)
 			else
 				fallback()
 			end
 		end, { "i", "s" }),
 	})
 
+  vim.api.nvim_set_keymap("i", "<Space>", 'copilot#Accept("")', { expr = true, silent = true })
 	map("n", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
 	map("i", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
 	map("n", "<F2>", "<CMD>lua vim.lsp.buf.rename()<CR>")
@@ -273,16 +279,6 @@ M.config = function()
 	-- plugin: suda.vim
 	-- plugin: persistence.nvim
 	-- lvim.keys.normal_mode["<C-k>"] = false
-	-- map("n", "<C-k><C-o>", "<CMD>Telescope projects<CR>")
-	-- map("n", "<C-k>o", ":e <C-r>=fnamemodify(expand('%:p'), ':p:h')<CR>/")
-	-- map("n", "<C-k>s", "<CMD>wa<CR>")
-	-- map("n", "<C-k>x", "<CMD>BufferKill<CR>")
-	-- map("n", "<C-k>u", ":try | %bd | catch | endtry<CR>")
-	-- map("n", "<C-k>w", "<CMD>%bd<CR>")
-	-- map("n", "<C-w>z", "<CMD>lua require('user.keybindings').zoom_current_window()<CR>")
-	-- map("n", "<M-s>", "<CMD>SudaWrite<CR>")
-	-- lvim.builtin.which_key.mappings["<Tab>"] = { ":try | b# | catch | endtry<CR>", "Switch Buffer" }
-	-- map("n", "<C-S-S>", ":saveas <C-r>=fnamemodify('.',':p')<CR>")
 	map("n", "<Tab>", "<CMD>wincmd w<CR>")
 	map("n", "<S-Tab>", "<CMD>wincmd W<CR>")
 	lvim.builtin.which_key.mappings["k"] = {
