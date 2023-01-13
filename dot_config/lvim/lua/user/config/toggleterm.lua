@@ -5,16 +5,14 @@ M.config = function()
 	lvim.builtin.terminal.execs = {}
 	lvim.builtin.terminal.hide_numbers = false
 	lvim.builtin.terminal.auto_scroll = false
-	lvim.builtin.terminal.shade_terminals = true
-	lvim.builtin.terminal.shading_factor = "1"
+	lvim.builtin.terminal.shade_terminals = false
+  -- 重写toggleterm的配置
 	require("toggleterm").setup({
 		direction = "horizontal",
-		shade_terminals = true,
-		shading_factor = "1",
 		hide_numbers = false,
 		auto_scroll = false,
 		winbar = {
-			enabled = false,
+			enabled = true,
 			name_formatter = function(term) --  term: Terminal
 				return term.name
 			end,

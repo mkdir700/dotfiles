@@ -161,6 +161,10 @@ M.config = function()
 	map("v", "H", "^")
 	map("o", "L", "$")
 	map("o", "H", "^")
+	-- 输入模式下 Shift + Enter 在当前行下面插入新行
+	map("i", "<S-Enter>", "<Esc>o")
+	-- Copilot
+	map("i", "<S-Tab>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 	--------------
 	-- 普通模式 --
@@ -188,15 +192,15 @@ M.config = function()
 	map("n", "=O", "<CMD>put! =@0<CR>")
 	map("v", "<Space>y", '"+y')
 	map("v", "<Space>p", '"+p')
+	lvim.builtin.which_key.mappings["o"] = { "<CMD>put =@+<CR>", "Paste Clipboard to Next Line" }
+	lvim.builtin.which_key.mappings["O"] = { "<CMD>put! =@+<CR>", "Paste Clipboard to Previous Line" }
+	lvim.builtin.which_key.mappings["by"] = { "<CMD>%y +<CR>", "Yank Whole Buffer to Clipboard" }
+	lvim.builtin.which_key.mappings["bp"] = { '<CMD>%d<CR>"+P', "Patse Clipboard to Whole Buffer" }
 	-- lvim.builtin.which_key.mappings["<Space>"] = { "<CMD>let @+ = @0<CR>", "Copy Register 0 to Clipboard" }
 	-- lvim.builtin.which_key.mappings["y"] = { '"+y', "Yank to Clipboard" }
 	-- lvim.builtin.which_key.mappings["Y"] = { '"+y$', "Yank All Right to Clipboard" }
 	-- lvim.builtin.which_key.mappings["p"] = { '"+p', "Paste Clipboard After Cursor" }
 	-- lvim.builtin.which_key.mappings["P"] = { '"+P', "Paste Clipboard Before Cursor" }
-	-- lvim.builtin.which_key.mappings["o"] = { "<CMD>put =@+<CR>", "Paste Clipboard to Next Line" }
-	-- lvim.builtin.which_key.mappings["O"] = { "<CMD>put! =@+<CR>", "Paste Clipboard to Previous Line" }
-	-- lvim.builtin.which_key.mappings["by"] = { "<CMD>%y +<CR>", "Yank Whole Buffer to Clipboard" }
-	-- lvim.builtin.which_key.mappings["bp"] = { '<CMD>%d<CR>"+P', "Patse Clipboard to Whole Buffer" }
 
 	--------------
 	-- 语言服务 --
@@ -233,24 +237,23 @@ M.config = function()
 				luasnip.jump(1)
 			elseif lccm.check_backspace() then
 				fallback()
-				-- elseif lccm.is_emmet_active() then
-				-- 	return vim.fn["cmp#complete"]()
-				-- elseif copilot_keys ~= "" and type(copilot_keys) == "string" then
-				-- vim.api.nvim_feedkeys(copilot_keys, "i", true)
+			-- elseif copilot_keys ~= "" and type(copilot_keys) == "string" then
+			-- 	vim.api.nvim_feedkeys(copilot_keys, "i", true)
+			-- elseif lccm.is_emmet_active() then
+			-- 	return vim.fn["cmp#complete"]()
 			else
 				fallback()
 			end
 		end, { "i", "s" }),
 	})
 
-  vim.api.nvim_set_keymap("i", "<Space>", 'copilot#Accept("")', { expr = true, silent = true })
 	map("n", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
 	map("i", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
 	map("n", "<F2>", "<CMD>lua vim.lsp.buf.rename()<CR>")
 	-- 给出代码建议
 	map("n", "<M-.>", "<CMD>lua vim.lsp.buf.code_action()<CR>")
 	-- 代码注释
-	map("n", "<C-_>", "gcc", { noremap = false })
+	map("n", "<C-_>", "gccj", { noremap = false })
 	map("v", "<C-_>", "<Plug>(comment_toggle_linewise_visual)", { noremap = false })
 	map("i", "<C-_>", "<CMD>normal gcc<CR>")
 	-- 使用 Trouble 插件展示引用信息
