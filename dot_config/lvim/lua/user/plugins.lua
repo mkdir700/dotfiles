@@ -195,6 +195,9 @@ M.config = function()
 		{
 			"sgur/vim-textobj-parameter",
 		},
+		{
+			"Julian/vim-textobj-variable-segment",
+		},
 		-- FIXME: 当前版本选择类或函数，会跳到下一行
 		{
 			"nvim-treesitter/nvim-treesitter-textobjects",
@@ -234,7 +237,7 @@ M.config = function()
 		},
 		-- You must install glow globally
 		-- https://github.com/charmbracelet/glow
-    -- Markdown 渲染工具
+		-- Markdown 渲染工具
 		{
 			"npxbr/glow.nvim",
 			ft = { "markdown" },

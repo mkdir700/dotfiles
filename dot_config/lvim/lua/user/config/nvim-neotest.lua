@@ -18,6 +18,7 @@ M.config = function()
 				-- Can also be a function to return dynamic value.
 				-- If not provided, the path will be inferred by checking for
 				-- virtual envs in the local directory and for Pipenev/Poetry configs
+        -- FIXME: 如何设置为当前项目的虚拟环境？
 				python = "/home/xyz/.virtualenvs/xyz-logistics-hmi-back/bin/python",
 				-- Returns if a given file path is a test file.
 				-- NB: This function is called a lot so don't perform any heavy tasks within it.
