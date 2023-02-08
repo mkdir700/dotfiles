@@ -322,6 +322,7 @@ M.config = function()
 		u = { "<CMD>UndotreeToggle<CR>", "UndoTree" },
 		c = { "<CMD>Calc<CR>", "Calculator" },
 		i = { "<CMD>Autoflake --remove-all-unused-imports<CR>", "AutoFlake" },
+    g = { "<CMD>ChatGPT<CR>", "ChatGPT" },
 	}
 	lvim.builtin.which_key.vmappings.a = {
 		name = "Application",

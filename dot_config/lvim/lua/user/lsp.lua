@@ -77,39 +77,16 @@ M.config = function()
 			},
 		}
 	end
-  lspconfig["ruff_lsp"].setup({
+	lspconfig["ruff_lsp"].setup({
 		on_attach = attach,
 	})
-	-- require("lspconfig").pylsp.setup({
-	-- 	root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
-	-- 	settings = {
-	-- 		pylsp = {
-	-- 			plugins = {
-	-- 				rope = {
-	-- 					enabled = true,
-	-- 				},
-	-- 				pyflakes = {
-	-- 					enabled = false,
-	-- 				},
-	-- 				pycodestyle = {
-	-- 					enabled = false,
-	-- 				},
-	-- 				ruff = {
-	-- 					enabled = true,
-	-- 				},
-	-- 				mypy = {
-	-- 					enabled = true,
-	-- 				},
-	-- 				mccabe = {
-	-- 					enabled = false,
-	-- 				},
-	-- 			},
-	-- 		},
-	-- 	},
-	-- })
-
 	-- 重写 lvim.lsp 的默认配置
 	lvim.lsp.diagnostics.float.focusable = true
+	-- 解决 cpp offsetEncoding 编码警告问题
+	-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428#issuecomment-997226723
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	capabilities.offsetEncoding = { "utf-16" }
+	require("lspconfig").clangd.setup({ capabilities = capabilities })
 end
 
 return M

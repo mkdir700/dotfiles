@@ -198,7 +198,6 @@ M.config = function()
 		{
 			"Julian/vim-textobj-variable-segment",
 		},
-		-- FIXME: 当前版本选择类或函数，会跳到下一行
 		{
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
@@ -298,17 +297,6 @@ M.config = function()
 			"petertriho/nvim-scrollbar",
 			config = function()
 				require("user.config.scrollbar").config()
-			end,
-		},
-		-- FIXME: 缩略进度条 必须使用命令才会显示，不会自动加载
-		{
-			"wfxr/minimap.vim",
-			run = "cargo install --locked code-minimap",
-			cmd = { "Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight" },
-			config = function()
-				vim.cmd("let g:minimap_width = 10")
-				vim.cmd("let g:minimap_auto_start = 1")
-				vim.cmd("let g:minimap_auto_start_win_enter = 1")
 			end,
 		},
 		{
@@ -510,6 +498,17 @@ M.config = function()
 				})
 				require("telescope").load_extension("persisted") -- To load the telescope extension
 			end,
+		},
+		{
+			"jackMort/ChatGPT.nvim",
+			config = function()
+				require("chatgpt").setup({})
+			end,
+			requires = {
+				"MunifTanjim/nui.nvim",
+				"nvim-lua/plenary.nvim",
+				"nvim-telescope/telescope.nvim",
+			},
 		},
 	}
 end
