@@ -3,11 +3,11 @@ local M = {}
 M.config = function()
 	vim.wo.foldmethod = "expr"
 	vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-	vim.wo.foldlevel = 3
-	vim.wo.foldtext =
-		[[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
-	vim.wo.foldnestmax = 3
-	vim.wo.foldminlines = 1
+	-- vim.wo.foldlevel = 3
+	-- vim.wo.foldtext =
+	-- 	[[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+	-- vim.wo.foldnestmax = 3
+	-- vim.wo.foldminlines = 1
 
 	lvim.builtin.treesitter.matchup.enable = true
 	lvim.builtin.treesitter.textobjects.select = {
@@ -20,10 +20,10 @@ M.config = function()
 			["if"] = "@function.inner",
 			["aa"] = "@parameter.outer",
 			["ia"] = "@parameter.inner",
-      ["al"] = "@call.outer",
-      ["il"] = "@call.inner",
-      ["ad"] = "@conditional.outer",
-      ["id"] = "@conditional.inner",
+			["al"] = "@call.outer",
+			["il"] = "@call.inner",
+			["ad"] = "@conditional.outer",
+			["id"] = "@conditional.inner",
 		},
 		selection_modes = {
 			["@parameter.outer"] = "v", -- charwise

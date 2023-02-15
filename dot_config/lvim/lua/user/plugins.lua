@@ -1,5 +1,6 @@
 local M = {}
 
+
 M.config = function()
 	lvim.plugins = {
 		--------------
