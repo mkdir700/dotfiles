@@ -320,9 +320,10 @@ M.config = function()
 		o = { "<CMD>SymbolsOutline<CR>", "Outline" },
 		t = { "<CMD>TodoTrouble<CR>", "TODO" },
 		u = { "<CMD>UndotreeToggle<CR>", "UndoTree" },
-		c = { "<CMD>Calc<CR>", "Calculator" },
+		C = { "<CMD>Calc<CR>", "Calculator" },
 		i = { "<CMD>Autoflake --remove-all-unused-imports<CR>", "AutoFlake" },
-    g = { "<CMD>ChatGPT<CR>", "ChatGPT" },
+    c = { "<CMD>ChatGPT<CR>", "ChatGPT" },
+    g = { "<CMD>Glow<CR>", "Render Markdown" },
 	}
 	lvim.builtin.which_key.vmappings.a = {
 		name = "Application",
