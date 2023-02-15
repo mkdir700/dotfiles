@@ -3,7 +3,6 @@ local M = {}
 M.config = function()
 	-- ---WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 	-- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
-
 	require("lvim.lsp.null-ls.linters").setup({
 		{ filetypes = { "sh" }, command = "shellcheck" },
 		{ filetypes = { "go" }, command = "golangci_lint" },
@@ -19,6 +18,7 @@ M.config = function()
 	require("lvim.lsp.null-ls.formatters").setup({
 		{ filetypes = { "sh" }, command = "shfmt", extra_args = { "-i", "2" } },
 		{ filetypes = { "cmake" }, command = "cmake_format" },
+		{ filetype = { "cpp", "c", "objc", "objcpp" }, command = "clang-format" },
 		{ filetypes = { "go" }, command = "gofmt" },
 		{ filetypes = { "python" }, command = "isort" },
 		{ filetypes = { "python" }, command = "black" },
@@ -28,24 +28,26 @@ M.config = function()
 	})
 
 	-- 重新定义 lsp 的默认配置
-	local attach = require("lvim.lsp").common_on_attach
+	local common_on_attach = require("lvim.lsp").common_on_attach
 	require("lvim.lsp").common_on_attach = function(client, bufnr)
 		require("lsp_signature").on_attach({
 			doc_lines = 10,
 			floating_window = false,
 			floating_window_above_cur_line = false,
 			hint_enable = true,
-			hint_prefix = "🦉 ",
+			hint_prefix = "🦉: ",
 			extra_trigger_chars = { "(", ",", "=" }, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
 			zindex = 1002, -- by default it will be on top of all floating windows, set to 50 send it to bottom
 			toggle_key = "<C-k>",
 			"/home/",
 		})
-		attach(client, bufnr)
+		common_on_attach(client, bufnr)
 	end
+	local attach = require("lvim.lsp").common_on_attach
 
 	local lspconfig = require("lspconfig")
 
+  -- Configure `pyright` for python
 	local python_root_files = {
 		"pyproject.toml",
 		"setup.py",
@@ -62,8 +64,8 @@ M.config = function()
 		root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
 	})
 
-	-- Configure `ruff-lsp`.
-	local configs = require("lspconfig.configs")
+	-- Configure `ruff-lsp` for python
+	local configs = lspconfig.configs
 	if not configs.ruff_lsp then
 		configs.ruff_lsp = {
 			default_config = {
@@ -78,13 +80,7 @@ M.config = function()
 			},
 		}
 	end
-	lspconfig["ruff_lsp"].setup({
-		on_attach = attach,
-	})
-
-	-- lspconfig["clangd"].setup({
-	-- 	on_attach = attach,
-	-- })
+	lspconfig["ruff_lsp"].setup({ on_attach = attach })
 
 	-- 重写 lvim.lsp 的默认配置
 	lvim.lsp.diagnostics.float.focusable = true
@@ -92,7 +88,10 @@ M.config = function()
 	-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428#issuecomment-997226723
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities.offsetEncoding = { "utf-16" }
-	require("lspconfig").clangd.setup({ capabilities = capabilities })
+	lspconfig["clangd"].setup({
+		on_attach = attach,
+		capabilities = capabilities,
+	})
 end
 
 return M
