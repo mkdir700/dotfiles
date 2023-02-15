@@ -63,7 +63,7 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/usr/local/bin\x1e/opt/homebrew/opt/sphinx\x2ddoc/bin\x1e/opt/homebrew/bin\x1e/Users/wuyuhang/\x2elocal/pipx/venvs/poetry\x1e/Users/wuyuhang/\x2elocal/pipx/venvs/poetry/bin\x1e/Users/wuyuhang/Library/Python/3\x2e8/bin\x1e/Users/mark/\x2ecargo/bin\x1e/Users/mark/\x2elocal/bin\x1e/Users/mark/Library/Python/3\x2e10/bin
+SETUVAR fish_user_paths:/opt/homebrew/sbin\x1e/usr/local/bin\x1e/opt/homebrew/opt/sphinx\x2ddoc/bin\x1e/opt/homebrew/bin\x1e/Users/wuyuhang/\x2elocal/pipx/venvs/poetry\x1e/Users/wuyuhang/\x2elocal/pipx/venvs/poetry/bin\x1e/Users/wuyuhang/Library/Python/3\x2e8/bin\x1e/Users/mark/\x2ecargo/bin\x1e/Users/mark/\x2elocal/bin\x1e/Users/mark/Library/Python/3\x2e10/bin
 SETUVAR http_proxy:http\x3a//127\x2e0\x2e0\x2e1\x3a7890
 SETUVAR https_proxy:http\x3a//127\x2e0\x2e0\x2e1\x3a7890
 SETUVAR tide_aws_bg_color:FF9900

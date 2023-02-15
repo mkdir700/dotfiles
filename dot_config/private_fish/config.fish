@@ -6,3 +6,4 @@ end
 starship init fish | source
 
 export PATH="$PATH:/Users/mark/.bin"
+export $(cat ~/.env | xargs)
