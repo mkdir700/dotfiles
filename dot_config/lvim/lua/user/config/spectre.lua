@@ -53,18 +53,18 @@ M.config = function()
 		":lua require('spectre').open_visual({path='/' .. vim.fn.fnameescape(vim.fn.expand('%:p:.'))})<CR>",
 		{ noremap = true, silent = true }
 	)
-	-- vim.api.nvim_set_keymap(
-	--   "n",
-	--   "<C-S-H>",
-	--   "<CMD>lua require('spectre').open_visual({select_word=true})<CR>",
-	--   { noremap = true }
-	-- )
-	-- vim.api.nvim_set_keymap(
-	--   "v",
-	--   "<C-S-H>",
-	--   ":lua require('spectre').open_visual()<CR>",
-	--   { noremap = true, silent = true }
-	-- )
+	vim.api.nvim_set_keymap(
+	  "n",
+	  "<C-S-H>",
+	  "<CMD>lua require('spectre').open_visual({select_word=true})<CR>",
+	  { noremap = true }
+	)
+	vim.api.nvim_set_keymap(
+	  "v",
+	  "<C-S-H>",
+	  ":lua require('spectre').open_visual()<CR>",
+	  { noremap = true, silent = true }
+	)
 end
 
 return M
