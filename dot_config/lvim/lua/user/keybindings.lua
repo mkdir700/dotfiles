@@ -322,13 +322,29 @@ M.config = function()
 		u = { "<CMD>UndotreeToggle<CR>", "UndoTree" },
 		C = { "<CMD>Calc<CR>", "Calculator" },
 		i = { "<CMD>Autoflake --remove-all-unused-imports<CR>", "AutoFlake" },
-    c = { "<CMD>ChatGPT<CR>", "ChatGPT" },
-    g = { "<CMD>Glow<CR>", "Render Markdown" },
+		c = { "<CMD>ChatGPT<CR>", "ChatGPT" },
+		g = { "<CMD>Glow<CR>", "Render Markdown" },
 	}
 	lvim.builtin.which_key.vmappings.a = {
 		name = "Application",
 	}
 	lvim.builtin.which_key.mappings["E"] = { "<CMD>NvimTreeFocus<CR>", "Explorer Focus" }
+
+	--------------
+	-- LSP 按键 --
+	--------------
+	-- 对 lunarvim 的 lsp 按键的补充
+	map("n", "gt", ":lua vim.lsp.buf.type_definition()<cr>", { desc = "Goto Type Definition" })
+	-- map("n", "gd", ":lua vim.lsp.buf.definition()<cr>", { desc = "Goto Definition" })
+	-- map("n", "gD", ":lua vim.lsp.buf.declaration()<cr>", { desc = "Goto Declaration" })
+	-- map("n", "gI", ":lua vim.lsp.buf.implementation()<cr>", { desc = "Goto Implementation" })
+	-- map("n", "gw", ":lua vim.lsp.buf.document_symbol()<cr>", { desc = "Goto Workspace Symbol" })
+	-- map("n", "gw", ":lua vim.lsp.buf.workspace_symbol()<cr>", { desc = "Goto Workspace Symbol" })
+	-- map("n", "gr", ":lua vim.lsp.buf.references()<cr>", { desc = "Goto References" })
+	-- map("n", "K", ":lua vim.lsp.buf.hover()<cr>", { desc = "Hover" })
+	-- map("n", "<c-k>", ":lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
+	-- map("n", "<leader>af", ":lua vim.lsp.buf.code_action()<cr>")
+	-- map("n", "<leader>rn", ":lua vim.lsp.buf.rename()<cr>")
 
 	--------------
 	-- 其他按键 --
