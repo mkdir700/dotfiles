@@ -4,10 +4,15 @@
 
 在 Lvim 的基础上二次修改。
 
-第三方库：
+额外的工具：
 
 - lazygit
 - ruff
+- clang-format
+- ripreg
+- glow
+- lazygit
+
 ```
 pip install ruff
 ```
