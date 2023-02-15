@@ -5,6 +5,7 @@ M.config = function()
 		--------------
 		-- 屏幕滚动 --
 		--------------
+		-- 用于在屏幕上滚动的插件
 		{
 			"karb94/neoscroll.nvim",
 			event = "WinScrolled",
@@ -15,6 +16,7 @@ M.config = function()
 		--------------
 		-- 光标移动 --
 		--------------
+		-- 增强 f/F/t/T 功能
 		{
 			"rhysd/clever-f.vim",
 			keys = { "f", "F", "t", "T" },
@@ -22,6 +24,7 @@ M.config = function()
 				require("user.setup.clever-f").setup()
 			end,
 		},
+		-- 用于快速跳转到指定位置
 		{
 			"phaazon/hop.nvim",
 			cmd = "Hop*",
@@ -29,6 +32,7 @@ M.config = function()
 				require("user.config.hop").config()
 			end,
 		},
+		-- 用于快速跳转到指定位置
 		{
 			"ggandor/leap.nvim",
 			event = "BufRead",
@@ -37,6 +41,7 @@ M.config = function()
 				require("user.config.leap-nvim").config()
 			end,
 		},
+		-- 增强 '%' 的匹配功能
 		{
 			"andymass/vim-matchup",
 			event = "CursorMoved",
@@ -44,6 +49,7 @@ M.config = function()
 				require("user.setup.matchup").setup()
 			end,
 		},
+		-- 在非跳转下，查看目标行
 		{
 			"nacro90/numb.nvim",
 			config = function()
@@ -60,6 +66,7 @@ M.config = function()
 				require("user.config.lastplace").config()
 			end,
 		},
+		-- 用于标记标签和快速跳转
 		{
 			"MattesGroeger/vim-bookmarks",
 			event = "BufRead",
@@ -77,7 +84,7 @@ M.config = function()
 				require("user.config.telescope-vim-bookmarks").config()
 			end,
 		},
-		-- 预览
+		-- 预览代码
 		{
 			"rmagatti/goto-preview",
 			config = function()
@@ -88,36 +95,12 @@ M.config = function()
 					"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
 					{ noremap = true }
 				)
-				-- vim.keymap.set(
-				-- 	"n",
-				-- 	"gpd",
-				-- 	"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
-				-- 	{ silent = true }
-				-- )
-				-- vim.keymap.set(
-				-- 	"n",
-				-- 	"gpt",
-				-- 	"<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",
-				-- 	{ silent = true }
-				-- )
-				-- vim.keymap.set(
-				-- 	"n",
-				-- 	"gpi",
-				-- 	'<cmd>lua require("goto-preview").goto_preview_implementation()<CR>',
-				-- 	{ silent = true }
-				-- )
-				-- vim.keymap.set("n", "gpp", "<cmd>lua require('goto-preview').close_all_win()<CR>", { silent = true })
-				-- vim.keymap.set(
-				-- 	"n",
-				-- 	"gpr",
-				-- 	"<cmd> lua require('goto-preview').goto_preview_references()<CR>",
-				-- 	{ silent = true }
-				-- )
 			end,
 		},
 		--------------
 		-- 全文搜索 --
 		--------------
+		-- visual 下选中的部分用于快速搜索
 		{
 			"bronson/vim-visual-star-search",
 			keys = { { "v", "*" }, { "v", "#" }, { "v", "g*" }, { "v", "g#" } },
@@ -154,14 +137,12 @@ M.config = function()
 				require("user.config.visual-multi").config()
 			end,
 		},
+		-- 累加/累减
 		{
 			"monaqa/dial.nvim",
 			config = function()
 				require("user.config.dial").config()
 			end,
-		},
-		{
-			"dkarter/bullets.vim",
 		},
 		-- 用于从远程终端复制到本地
 		{
@@ -234,15 +215,13 @@ M.config = function()
 				require("user.config.rust-tools").config()
 			end,
 		},
-		-- You must install glow globally
-		-- https://github.com/charmbracelet/glow
 		-- Markdown 渲染工具
 		{
 			"npxbr/glow.nvim",
 			ft = { "markdown" },
 			run = "yay -S glow",
 		},
-		-- 文档
+		-- 为函数/方法/类生成接口文档
 		{
 			"danymat/neogen",
 			config = function()
@@ -273,6 +252,7 @@ M.config = function()
 		-- 清除未使用的库
 		{
 			"tenfyzhong/autoflake.vim",
+			ft = { "python", "py", "pyi" },
 			run = "pip install autoflake",
 		},
 		--------------

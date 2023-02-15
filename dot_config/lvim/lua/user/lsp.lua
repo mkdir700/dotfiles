@@ -35,17 +35,17 @@ M.config = function()
 			floating_window = false,
 			floating_window_above_cur_line = false,
 			hint_enable = true,
-			hint_prefix = " ",
+			hint_prefix = "🦉 ",
 			extra_trigger_chars = { "(", ",", "=" }, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
 			zindex = 1002, -- by default it will be on top of all floating windows, set to 50 send it to bottom
 			toggle_key = "<C-k>",
 			"/home/",
 		})
-
 		attach(client, bufnr)
 	end
 
 	local lspconfig = require("lspconfig")
+
 	local python_root_files = {
 		"pyproject.toml",
 		"setup.py",
@@ -61,6 +61,7 @@ M.config = function()
 		on_attach = attach,
 		root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
 	})
+
 	-- Configure `ruff-lsp`.
 	local configs = require("lspconfig.configs")
 	if not configs.ruff_lsp then
@@ -80,6 +81,11 @@ M.config = function()
 	lspconfig["ruff_lsp"].setup({
 		on_attach = attach,
 	})
+
+	-- lspconfig["clangd"].setup({
+	-- 	on_attach = attach,
+	-- })
+
 	-- 重写 lvim.lsp 的默认配置
 	lvim.lsp.diagnostics.float.focusable = true
 	-- 解决 cpp offsetEncoding 编码警告问题
