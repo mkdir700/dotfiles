@@ -1,6 +1,5 @@
 local M = {}
 
-
 M.config = function()
 	lvim.plugins = {
 		--------------
@@ -426,6 +425,14 @@ M.config = function()
 		{ "felipec/vim-sanegx" }, -- FIXME
 		-- 统计 coding 时长
 		{ "wakatime/vim-wakatime" },
+		-- 自动切换输入法
+    -- 需要安装 https://github.com/daipeihust/im-select
+		{
+			"keaising/im-select.nvim",
+			config = function()
+				require("user.config.im-select").config()
+			end,
+		},
 		-- 自动保存
 		{
 			"Pocco81/auto-save.nvim",
