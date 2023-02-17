@@ -1,0 +1,16 @@
+{
+  "fn": {
+    "prefix": "fn",
+    "body": [
+      "${1:type} ${2:function_name}(${3:args}) {",
+      "\t$4",
+      "}"
+    ],
+    "description": "function"
+  },
+  "co": {
+    "prefix": "co",
+    "body": ["cout << ${1:var} << endl;"],
+    "description": "cout"
+  }
+}
