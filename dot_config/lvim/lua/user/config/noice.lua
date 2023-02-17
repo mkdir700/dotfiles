@@ -15,7 +15,8 @@ M.config = function()
 		},
 		messages = {
 			enabled = true, -- enables the Noice messages UI
-			view = "mini", -- default view for messages
+			-- view = "mini", -- default view for messages
+			view = false, -- default view for messages
 			view_error = "mini", -- view for errors
 			view_warn = "notify", -- view for warnings
 			view_history = "messages", -- view for :messages
@@ -38,13 +39,13 @@ M.config = function()
 			signature = {
 				enabled = false,
 			},
-      hover = {
-        enabled = false,
-      }
+			hover = {
+				enabled = false,
+			},
 		},
 		-- you can enable a preset for easier configuration
 		presets = {
-			bottom_search = true, -- use a classic bottom cmdline for search
+			bottom_search = false, -- use a classic bottom cmdline for search
 			command_palette = true, -- position the cmdline and popupmenu together
 			long_message_to_split = true, -- long messages will be sent to a split
 			inc_rename = false, -- enables an input dialog for inc-rename.nvim
