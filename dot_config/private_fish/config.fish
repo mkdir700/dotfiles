@@ -7,3 +7,5 @@ starship init fish | source
 
 export PATH="$PATH:/Users/mark/.bin"
 export $(cat ~/.env | xargs)
+export EDITOR="vv"
+export VISUAL="vv"
