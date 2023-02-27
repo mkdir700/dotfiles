@@ -275,6 +275,8 @@ M.config = function()
 	-- vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
 	--   {silent = true, noremap = true}
 	-- )
+	-- 重启 LSP
+	lvim.builtin.which_key.mappings.l.R = { "<cmd>LspRestart<cr>", "Restart LSP", { silent = true, noremap = true } }
 
 	--------------
 	-- 文件(File)操作 --
@@ -355,7 +357,7 @@ M.config = function()
 	-- map("n", "<M-T>", "<CMD>TranslateR<CR>")
 	-- map("v", "<M-T>", ":TranslateR<CR>")
 	-- map("n", "<C-k><C-s>", "<CMD>Telescope keymaps<CR>")
-	map("n", "<M-e>", "<CMD>NvimTreeToggle<CR>")
+	map("n", "<M-e>", "<CMD>NvimTreeFocus<CR>")
 	map("n", "<C-S-P>", "<CMD>Telescope commands<CR>")
 	lvim.builtin.which_key.mappings[";"] = nil
 	lvim.builtin.which_key.mappings["/"] = nil
