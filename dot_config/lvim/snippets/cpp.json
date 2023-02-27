@@ -10,7 +10,39 @@
   },
   "co": {
     "prefix": "co",
-    "body": ["cout << ${1:var} << endl;"],
+    "body": [
+      "cout << ${1:var} << endl;"
+    ],
     "description": "cout"
+  },
+  "pub": {
+    "prefix": "pub",
+    "body": [
+      "public:"
+    ],
+    "description": "public"
+  },
+  "pri": {
+    "prefix": "pri",
+    "body": [
+      "private:"
+    ],
+    "description": "private"
+  },
+  "pro": {
+    "prefix": "pro",
+    "body": [
+      "protected:"
+    ],
+    "description": "pro"
+  },
+  "classp": {
+    "prefix": "classp",
+    "body": [
+      "class ${1:ClassName} : public ${2:BaseClassName} {",
+      "\t$3",
+      "};"
+    ],
+    "description": "class ClassName : public BaseClassName"
   }
 }
