@@ -265,10 +265,10 @@ M.config = function()
 	-- lvim.builtin.which_key.mappings.l.x = { "<cmd>TroubleToggle<cr>", "Trouble", { silent = true, noremap = true } }
 	-- 展示当前文件的问题
 	lvim.builtin.which_key.mappings.l.x =
-		{ "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble", { silent = true, noremap = true } }
+		{ "<cmd>TroubleToggle document_diagnostics<cr>", "Document Trouble", { silent = true, noremap = true } }
 	-- 展示当前工作区的问题
 	lvim.builtin.which_key.mappings.l.X =
-		{ "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble", { silent = true, noremap = true } }
+		{ "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Trouble", { silent = true, noremap = true } }
 	-- vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
 	--   {silent = true, noremap = true}
 	-- )
