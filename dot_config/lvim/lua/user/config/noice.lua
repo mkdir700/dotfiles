@@ -103,6 +103,18 @@ M.config = function()
 	-- 		return "<C-u>"
 	-- 	end
 	-- end, { silent = true, expr = true })
+
+	require("notify").setup({
+		timeout = 3000,
+		icons = {
+			ERROR = " ",
+			WARN = " ",
+			INFO = " ",
+			DEBUG = " ",
+			TRACE = " ",
+		},
+		background_colour = "#000000",
+	})
 end
 
 return M
