@@ -164,7 +164,7 @@ M.config = function()
 	-- 输入模式下 Shift + Enter 在当前行下面插入新行
 	map("i", "<S-Enter>", "<Esc>o")
 	-- Copilot
-	map("i", "<S-Tab>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+	-- map("i", "<S-Tab>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 	--------------
 	-- 普通模式 --
