@@ -341,6 +341,7 @@ M.config = function()
 		-- 界面美化 --
 		--------------
 		{ "p00f/nvim-ts-rainbow" },
+		-- 主题
 		{
 			"norcalli/nvim-colorizer.lua",
 			config = function()
@@ -348,19 +349,30 @@ M.config = function()
 			end,
 		},
 		{
-			"abzcoding/tokyonight.nvim",
-			as = "tokyo-night",
-			branch = "feat/local",
+			"loctvl842/monokai-pro.nvim",
 			config = function()
-				require("user.config.tokyonight").config()
-				vim.cmd([[colorscheme tokyonight-moon]])
-				lvim.builtin.lualine.options.theme = "tokyonight"
+				require("user.config.monokai-pro").config()
+				vim.cmd([[colorscheme monokai-pro]])
 			end,
 			cond = function()
 				local _time = os.date("*t")
 				return _time.hour >= 15 and _time.hour < 24
 			end,
 		},
+		-- {
+		-- 	"abzcoding/tokyonight.nvim",
+		-- 	as = "tokyo-night",
+		-- 	branch = "feat/local",
+		-- 	config = function()
+		-- 		require("user.config.tokyonight").config()
+		-- 		vim.cmd([[colorscheme tokyonight-moon]])
+		-- 		lvim.builtin.lualine.options.theme = "tokyonight"
+		-- 	end,
+		-- 	cond = function()
+		-- 		local _time = os.date("*t")
+		-- 		return _time.hour >= 15 and _time.hour < 24
+		-- 	end,
+		-- },
 		{
 			"catppuccin/nvim",
 			as = "catppuccin",
@@ -400,7 +412,6 @@ M.config = function()
 			"fedorenchik/VimCalc3",
 			cmd = { "Calc" },
 		},
-		{ "github/copilot.vim", run = ":Copilot setup" },
 		{
 			"kdheepak/lazygit.nvim",
 			config = function()
@@ -426,7 +437,7 @@ M.config = function()
 		-- 统计 coding 时长
 		{ "wakatime/vim-wakatime" },
 		-- 自动切换输入法
-    -- 需要安装 https://github.com/daipeihust/im-select
+		-- 需要安装 https://github.com/daipeihust/im-select
 		{
 			"keaising/im-select.nvim",
 			config = function()
@@ -487,6 +498,23 @@ M.config = function()
 				require("telescope").load_extension("persisted") -- To load the telescope extension
 			end,
 		},
+		-- AI 代码补全
+		-- { "github/copilot.vim", run = ":Copilot setup" },
+		{
+			"zbirenbaum/copilot.lua",
+			cmd = "Copilot",
+			event = "InsertEnter",
+			config = function()
+				require("user.config.copilot").config()
+			end,
+		},
+		-- {
+		-- 	"zbirenbaum/copilot-cmp",
+		-- 	after = { "copilot.lua" },
+		-- 	config = function()
+		-- 		require("copilot_cmp").setup()
+		-- 	end,
+		-- },
 		{
 			"jackMort/ChatGPT.nvim",
 			config = function()
