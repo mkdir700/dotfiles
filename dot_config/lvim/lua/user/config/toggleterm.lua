@@ -2,29 +2,11 @@ local M = {}
 
 M.config = function()
 	-- 禁用默认的terminal
+  lvim.builtin.terminal.direction = "horizontal"
 	lvim.builtin.terminal.execs = {}
 	lvim.builtin.terminal.hide_numbers = false
 	lvim.builtin.terminal.auto_scroll = false
 	lvim.builtin.terminal.shade_terminals = false
-  -- 重写toggleterm的配置
-	require("toggleterm").setup({
-		direction = "horizontal",
-		hide_numbers = false,
-		auto_scroll = false,
-		winbar = {
-			enabled = true,
-			name_formatter = function(term) --  term: Terminal
-				return term.name
-			end,
-		},
-	})
-	-- local Terminal = require("toggleterm.terminal").Terminal
-
-	-- local ipython = Terminal:new({ cmd = "ipython" })
-	-- function _ipython()
-	-- 	ipython:toggle()
-	-- end
-
 	vim.keymap.set({ "n", "t", "i" }, "<M-1>", "<CMD>ToggleTerm direction=horizontal<CR>")
 	vim.keymap.set({ "n", "t", "i" }, "<M-2>", "<CMD>ToggleTerm direction=vertical<CR>")
 	vim.keymap.set({ "n", "t", "i" }, "<M-3>", "<CMD>ToggleTerm direction=float<CR>")
@@ -54,6 +36,29 @@ M.config = function()
 		"<CMD>'<,'>ToggleTermSendVisualSelection<CR>",
 		"Send visual selection to terminal",
 	}
+
+	function _G.set_terminal_keymaps()
+		local opts = { buffer = 0, noremap = true }
+		local bufname = vim.fn.bufname("%")
+		if not string.find(bufname, "lazygit") then
+			-- 只在打开非 lazygit 终端时设置映射
+			vim.keymap.set("t", "<esc>", "<C-\\><C-n>", opts)
+			vim.keymap.set("t", "jk", "<C-\\><C-n>", opts)
+			vim.keymap.set("t", "<C-k>", "<Cmd>wincmd p<CR>", opts)
+			-- <C-l> 清空终端
+			vim.api.nvim_set_keymap(
+				"t",
+				"<C-l>",
+				'<Cmd>lua vim.api.nvim_buf_call(0, function() vim.cmd(\'TermExec cmd="clear"\') vim.fn.feedkeys("a") end)<CR>',
+				{ noremap = true, silent = true }
+			)
+		end
+	end
+
+	vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+
+	local Terminal = require("toggleterm.terminal").Terminal
+	local lazygit = Terminal:new({ cmd = "lazygit", count = 5 })
 	-- vim.api.nvim_create_user_command("ToggleTermSendCurrentLine", function(opts)
 	-- 	send_term("single_line", false, opts.args)
 	-- end, { nargs = "?", force = true })
