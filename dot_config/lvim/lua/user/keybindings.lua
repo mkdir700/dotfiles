@@ -29,15 +29,6 @@ M.config = function()
 	}
 
 	--------------
-	-- 终端(terminal)管理 --
-	--------------
-	map("t", "<C-q>[", "<C-\\><C-n>")
-	map("t", "<S-Esc>", "<C-\\><C-n>")
-	map("t", "<C-h>", "<BS>")
-	map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
-	-- map("t", "<C-k>", "<ESC>d$a<BS><BS>")
-
-	--------------
 	-- 窗口(widnows)管理 --
 	--------------
 	map("n", "<M-K>", ":resize +2<CR>")
@@ -218,6 +209,16 @@ M.config = function()
 		["<C-f>"] = nil,
 		["<C-u>"] = cmp.mapping.scroll_docs(-4),
 		["<C-d>"] = cmp.mapping.scroll_docs(4),
+		["<C-y>"] = cmp.mapping({
+			i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+			c = function(fallback)
+				if cmp.visible() then
+					cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+				else
+					fallback()
+				end
+			end,
+		}),
 		["<CR>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.confirm(lvim.builtin.cmp.confirm_opts)
@@ -226,25 +227,28 @@ M.config = function()
 			end
 		end),
 		["<Tab>"] = cmp.mapping(function(fallback)
-			-- local copilot_keys = vim.fn["copilot#Accept"]()
 			if cmp.visible() then
-				if luasnip.expandable() and cmp.get_active_entry() == nil then
-					cmp.confirm(lvim.builtin.cmp.confirm_opts)
-				end
-			elseif luasnip.expandable() then
-				luasnip.expand({})
-			elseif lccm.jumpable() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_locally_jumpable() then
+				luasnip.expand_or_jump()
+			elseif lccm.jumpable(1) then
 				luasnip.jump(1)
 			elseif lccm.check_backspace() then
 				fallback()
-			-- elseif copilot_keys ~= "" and type(copilot_keys) == "string" then
-			-- 	vim.api.nvim_feedkeys(copilot_keys, "i", true)
-			-- elseif lccm.is_emmet_active() then
-			-- 	return vim.fn["cmp#complete"]()
 			else
 				fallback()
 			end
 		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<C-e>"] = cmp.mapping.abort(),
 	})
 
 	map("n", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
@@ -285,7 +289,7 @@ M.config = function()
 	-- plugin: persistence.nvim
 	-- lvim.keys.normal_mode["<C-k>"] = false
 	map("n", "<Tab>", "<CMD>wincmd w<CR>")
-	map("n", "<S-Tab>", "<CMD>wincmd W<CR>")
+	map("n", "<S-Tab>", "<CMD>wincmd p<CR>")
 	lvim.builtin.which_key.mappings["k"] = {
 		name = "文件操作",
 		n = { "<CMD>enew<CR>", "新建文件" },
