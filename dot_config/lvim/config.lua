@@ -41,6 +41,8 @@ require("user.treesitter").config()
 
 require("user.lsp").config()
 
+require("user.autopairs").config()
+
 require("user.plugins").config()
 
 require("user.keybindings").config()
@@ -48,3 +50,4 @@ require("user.keybindings").config()
 require("user.config.toggleterm").config()
 
 require("user.telescope").config()
+
