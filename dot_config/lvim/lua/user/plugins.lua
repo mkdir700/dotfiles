@@ -249,11 +249,19 @@ M.config = function()
 				})
 			end,
 		},
-		-- 清除未使用的库
+		-- Python 清除未使用的库
 		{
 			"tenfyzhong/autoflake.vim",
 			ft = { "python", "py", "pyi" },
 			run = "pip install autoflake",
+		},
+		-- Python 清除多余的空格
+		-- resovle: https://github.com/mkdir700/dotfiles/issues/4
+		{
+			"Vimjas/vim-python-pep8-indent",
+			config = function()
+				vim.g.python_pep8_indent = 1
+			end,
 		},
 		--------------
 		-- 文件操作 --
