@@ -13,16 +13,6 @@ M.config = function()
 			type = "stl",
 			-- color = { fg = "#b3e1a3" },
 		},
-		-- {
-		-- 	"",
-		-- 	type = "stl",
-		-- 	color = { fg = "#e697a7" },
-		-- },
-		-- {
-		-- 	"",
-		-- 	type = "stl",
-		-- 	color = { fg = "#a4b9ef" },
-		-- },
 	}
 	lvim.builtin.lualine.sections.lualine_b = {
 		{
