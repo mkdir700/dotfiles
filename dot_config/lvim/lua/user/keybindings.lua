@@ -174,7 +174,7 @@ M.config = function()
 	--------------
 	-- 复制粘贴 --
 	--------------
-	-- map("i", "<C-v>", "<C-r>+")
+	map("i", "<C-v>", "<C-r>+")
 	map("n", "Y", "y$")
 	map("v", "=p", '"0p')
 	map("n", "=p", '"0p')
@@ -355,12 +355,10 @@ M.config = function()
 	--------------
 	-- 其他按键 --
 	--------------
-	-- map("n", "<M-z>", "<CMD>let &wrap=!&wrap<CR>")
-	-- map("n", "<M-t>", "<CMD>TranslateW<CR>")
-	-- map("v", "<M-t>", ":TranslateW<CR>")
-	-- map("n", "<M-T>", "<CMD>TranslateR<CR>")
-	-- map("v", "<M-T>", ":TranslateR<CR>")
 	-- map("n", "<C-k><C-s>", "<CMD>Telescope keymaps<CR>")
+	map("n", "<M-z>", "<CMD>let &wrap=!&wrap<CR>")
+	map("n", "<M-t>", "<CMD>TranslateW<CR>")
+	map("v", "<M-t>", ":TranslateW<CR>")
 	map("n", "<M-e>", "<CMD>NvimTreeFocus<CR>")
 	map("n", "<C-S-P>", "<CMD>Telescope commands<CR>")
 	lvim.builtin.which_key.mappings[";"] = nil

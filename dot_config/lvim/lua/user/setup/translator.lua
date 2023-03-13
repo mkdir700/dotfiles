@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-	vim.g.translator_default_engines = { "bing", "youdao" }
+	vim.g.translator_default_engines = { "google", "youdao" }
 end
 
 return M
