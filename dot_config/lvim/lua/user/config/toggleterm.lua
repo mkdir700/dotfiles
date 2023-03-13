@@ -26,15 +26,12 @@ M.config = function()
 		-- 插入模式下 <C-h> 向左删除字符
 		vim.keymap.set("t", "<C-h>", "<BS>", opts)
 
-		if string.find(bufname, "lazygit") then
-			vim.keymap.set("t", "<esc>", "<C-c>", opts)
-		end
-
 		if not string.find(bufname, "lazygit") then
 			-- 只在打开非 lazygit 终端时设置映射
 			vim.keymap.set("t", "<esc>", "<C-\\><C-n>", opts)
 			vim.keymap.set("t", "jk", "<C-\\><C-n>", opts)
-			vim.keymap.set("t", "<C-k>", "<Cmd>wincmd p<CR>", opts)
+      vim.keymap.set("t", "<C-S-u>", "<C-\\><C-n><C-u>", opts)
+			vim.keymap.set({ "t", "n" }, "<C-k>", "<Cmd>wincmd p<CR>", opts)
 			-- <C-l> 清空终端
 			vim.api.nvim_set_keymap(
 				"t",
