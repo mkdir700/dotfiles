@@ -494,6 +494,10 @@ M.config = function()
 				vim.cmd([[ LspRestart ]])
 			end,
 		},
+    -- Enhanced gF command for Python
+		{
+			"sychen52/gF-python-traceback",
+		},
 		-- Session 会话管理
 		{
 
