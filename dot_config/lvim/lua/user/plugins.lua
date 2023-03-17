@@ -128,6 +128,17 @@ M.config = function()
 		-- 快速编辑 --
 		--------------
 		{
+			"gbprod/yanky.nvim",
+			config = function()
+				require("yanky").setup({
+					preserve_cursor_position = {
+						enabled = true,
+					},
+				})
+				require("telescope").load_extension("yank_history")
+			end,
+		},
+		{
 			"mg979/vim-visual-multi",
 			keys = { "<C-n>", { "v", "<C-n>" }, "<C-S-L>", { "v", "<C-S-L>" }, "ma", { "v", "ma" } },
 			setup = function()
@@ -494,7 +505,7 @@ M.config = function()
 				vim.cmd([[ LspRestart ]])
 			end,
 		},
-    -- Enhanced gF command for Python
+		-- Enhanced gF command for Python
 		{
 			"sychen52/gF-python-traceback",
 		},

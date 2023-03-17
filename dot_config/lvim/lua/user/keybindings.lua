@@ -166,27 +166,45 @@ M.config = function()
 	-- plugin: vim-textobj-indent
 	-- plugin: vim-textobj-line
 	-- plugin: vim-textobj-parameter
-	-- plugin: nvim-treesitter-textobjects
-	-- plugin: vim-repeate
+  -- plugin: nvim-treesitter-textobjects
+  -- plugin: vim-repeate
 	-- plugin: vim-surround
 	-- map("n", "S", "i<CR><Esc>")
 
 	--------------
 	-- 复制粘贴 --
-	--------------
+	----------------
+	-- 复制后，光标的位置不会改变
+	map({ "n", "x" }, "y", "<Plug>(YankyYank)")
+  map({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+	map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+  -- 剪切(粘贴后复制, 原版 vim 的操作逻辑)
+  -- TODO: 没有想好用什么快捷键，^_^
+	-- map({ "n", "x" }, "=p", "<Plug>(YankyGPutAfter)")
+	-- map({ "n", "x" }, "=P", "<Plug>(YankyGPutBefore)")
+  -- 这将强制在当前行上方或下方放置
+	map("n", "]p", "<Plug>(YankyPutIndentAfterLinewise)")
+	map("n", "[p", "<Plug>(YankyPutIndentBeforeLinewise)")
+	map("n", "]P", "<Plug>(YankyPutIndentAfterLinewise)")
+	map("n", "[P", "<Plug>(YankyPutIndentBeforeLinewise)")
+	-- 在当前行的上行/下行粘贴，并重新缩进
+	map("n", "=p", "<Plug>(YankyPutAfterFilter)")
+	map("n", "=P", "<Plug>(YankyPutBeforeFilter)")
+	vim.keymap.set("n", "<M-n>", "<Plug>(YankyCycleForward)")
+	vim.keymap.set("n", "<M-p>", "<Plug>(YankyCycleBackward)")
 	map("i", "<C-v>", "<C-r>+")
 	map("n", "Y", "y$")
-	map("v", "=p", '"0p')
-	map("n", "=p", '"0p')
-	map("n", "=P", '"0P')
-	map("n", "=o", "<CMD>put =@0<CR>")
-	map("n", "=O", "<CMD>put! =@0<CR>")
-	map("v", "<Space>y", '"+y')
-	map("v", "<Space>p", '"+p')
 	lvim.builtin.which_key.mappings["o"] = { "<CMD>put =@+<CR>", "Paste Clipboard to Next Line" }
 	lvim.builtin.which_key.mappings["O"] = { "<CMD>put! =@+<CR>", "Paste Clipboard to Previous Line" }
 	lvim.builtin.which_key.mappings["by"] = { "<CMD>%y +<CR>", "Yank Whole Buffer to Clipboard" }
 	lvim.builtin.which_key.mappings["bp"] = { '<CMD>%d<CR>"+P', "Patse Clipboard to Whole Buffer" }
+	-- map("v", "=p", '"0p')
+	-- map("n", "=p", '"0p')
+	-- map("n", "=P", '"0P')
+	-- map("n", "=o", "<CMD>put =@0<CR>")
+	-- map("n", "=O", "<CMD>put! =@0<CR>")
+	-- map("v", "<Space>y", '"+y')
+	-- map("v", "<Space>p", '"+p')
 	-- lvim.builtin.which_key.mappings["<Space>"] = { "<CMD>let @+ = @0<CR>", "Copy Register 0 to Clipboard" }
 	-- lvim.builtin.which_key.mappings["y"] = { '"+y', "Yank to Clipboard" }
 	-- lvim.builtin.which_key.mappings["Y"] = { '"+y$', "Yank All Right to Clipboard" }
