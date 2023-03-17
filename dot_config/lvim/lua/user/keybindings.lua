@@ -175,13 +175,12 @@ M.config = function()
 	-- 复制粘贴 --
 	----------------
 	-- 复制后，光标的位置不会改变
-	map({ "n", "x" }, "y", "<Plug>(YankyYank)")
-  map({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-	map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+	vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
+  vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+	vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
   -- 剪切(粘贴后复制, 原版 vim 的操作逻辑)
-  -- TODO: 没有想好用什么快捷键，^_^
-	-- map({ "n", "x" }, "=p", "<Plug>(YankyGPutAfter)")
-	-- map({ "n", "x" }, "=P", "<Plug>(YankyGPutBefore)")
+	-- vim.keymap.set({ "n", "x" }, "=p", "<Plug>(YankyGPutAfter)")
+	-- vim.keymap.set({ "n", "x" }, "=P", "<Plug>(YankyGPutBefore)")
   -- 这将强制在当前行上方或下方放置
 	map("n", "]p", "<Plug>(YankyPutIndentAfterLinewise)")
 	map("n", "[p", "<Plug>(YankyPutIndentBeforeLinewise)")
