@@ -489,7 +489,18 @@ M.config = function()
 		{
 			"beauwilliams/focus.nvim",
 			config = function()
-				require("focus").setup()
+				require("focus").setup({
+					hybridnumber = true,
+					excluded_filetypes = {
+						"NvimTree",
+						"vista",
+						"dbui",
+						"packer",
+						"toggleterm",
+						"Diff View",
+						"DiffView",
+					},
+				})
 			end,
 		},
 		-- Python 虚拟环境
