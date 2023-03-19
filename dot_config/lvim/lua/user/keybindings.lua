@@ -166,8 +166,8 @@ M.config = function()
 	-- plugin: vim-textobj-indent
 	-- plugin: vim-textobj-line
 	-- plugin: vim-textobj-parameter
-  -- plugin: nvim-treesitter-textobjects
-  -- plugin: vim-repeate
+	-- plugin: nvim-treesitter-textobjects
+	-- plugin: vim-repeate
 	-- plugin: vim-surround
 	-- map("n", "S", "i<CR><Esc>")
 
@@ -176,12 +176,12 @@ M.config = function()
 	----------------
 	-- 复制后，光标的位置不会改变
 	vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
-  vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+	vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
 	vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-  -- 剪切(粘贴后复制, 原版 vim 的操作逻辑)
+	-- 剪切(粘贴后复制, 原版 vim 的操作逻辑)
 	-- vim.keymap.set({ "n", "x" }, "=p", "<Plug>(YankyGPutAfter)")
 	-- vim.keymap.set({ "n", "x" }, "=P", "<Plug>(YankyGPutBefore)")
-  -- 这将强制在当前行上方或下方放置
+	-- 这将强制在当前行上方或下方放置
 	map("n", "]p", "<Plug>(YankyPutIndentAfterLinewise)")
 	map("n", "[p", "<Plug>(YankyPutIndentBeforeLinewise)")
 	map("n", "]P", "<Plug>(YankyPutIndentAfterLinewise)")
@@ -346,6 +346,7 @@ M.config = function()
 		C = { "<CMD>Calc<CR>", "Calculator" },
 		i = { "<CMD>Autoflake --remove-all-unused-imports<CR>", "AutoFlake" },
 		c = { "<CMD>ChatGPT<CR>", "ChatGPT" },
+		d = { "<CMD>DiffviewOpen<CR>", "Diffview" },
 		g = { "<CMD>Glow<CR>", "Render Markdown" },
 	}
 	lvim.builtin.which_key.vmappings.a = {
