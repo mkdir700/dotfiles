@@ -368,6 +368,35 @@ M.config = function()
 			end,
 		},
 		{
+			"abzcoding/tokyonight.nvim",
+			as = "tokyo-night",
+			branch = "feat/local",
+			config = function()
+				require("user.config.tokyonight").config()
+				-- vim.cmd([[colorscheme tokyonight-moon]])
+				-- lvim.builtin.lualine.options.theme = "tokyonight"
+			end,
+			cond = function()
+				-- local _time = os.date("*t")
+				-- return _time.hour >= 15 and _time.hour < 24
+				return false
+			end,
+		},
+		{
+			"catppuccin/nvim",
+			as = "catppuccin",
+			config = function()
+				require("user.config.catppuccin").config()
+				-- vim.cmd([[colorscheme catppuccin]])
+				-- lvim.builtin.lualine.options.theme = "catppuccin"
+			end,
+			cond = function()
+				-- local _time = os.date("*t")
+				-- return (_time.hour >= 0 and _time.hour < 15)
+				return false
+			end,
+		},
+		{
 			"loctvl842/monokai-pro.nvim",
 			config = function()
 				require("user.config.monokai-pro").config()
@@ -378,27 +407,30 @@ M.config = function()
 				return _time.hour >= 15 and _time.hour < 24
 			end,
 		},
-		-- {
-		-- 	"abzcoding/tokyonight.nvim",
-		-- 	as = "tokyo-night",
-		-- 	branch = "feat/local",
-		-- 	config = function()
-		-- 		require("user.config.tokyonight").config()
-		-- 		vim.cmd([[colorscheme tokyonight-moon]])
-		-- 		lvim.builtin.lualine.options.theme = "tokyonight"
-		-- 	end,
-		-- 	cond = function()
-		-- 		local _time = os.date("*t")
-		-- 		return _time.hour >= 15 and _time.hour < 24
-		-- 	end,
-		-- },
 		{
-			"catppuccin/nvim",
-			as = "catppuccin",
+			"projekt0n/github-nvim-theme",
+			tag = "v0.0.7",
 			config = function()
-				require("user.config.catppuccin").config()
-				vim.cmd([[colorscheme catppuccin]])
-				lvim.builtin.lualine.options.theme = "catppuccin"
+				require("github-theme").setup({
+					-- dark/dimmed/dark_default/dark_colorblind/light/light_default/light_colorblind
+					theme_style = "dark",
+					function_style = "italic",
+					sidebars = { "qf", "vista_kind", "terminal", "packer" },
+
+					-- Change the "hint" color to the "orange" color, and make the "error" color bright red
+					-- colors = { hint = "orange", error = "#ff0000" },
+
+					-- Overwrite the highlight groups
+					-- overrides = function(c)
+					-- 	return {
+					-- 		htmlTag = { fg = c.red, bg = "#282c34", sp = c.hint, style = "underline" },
+					-- 		DiagnosticHint = { link = "LspDiagnosticsDefaultHint" },
+					-- 		-- this will remove the highlight groups
+					-- 		TSField = {},
+					-- 	}
+					-- end,
+				})
+				vim.cmd([[colorscheme github-theme]])
 			end,
 			cond = function()
 				local _time = os.date("*t")
