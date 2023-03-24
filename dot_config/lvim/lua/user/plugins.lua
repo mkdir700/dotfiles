@@ -430,7 +430,7 @@ M.config = function()
 					-- 	}
 					-- end,
 				})
-				vim.cmd([[colorscheme github-theme]])
+				vim.cmd([[colorscheme github_dark]])
 			end,
 			cond = function()
 				local _time = os.date("*t")
