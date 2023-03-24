@@ -47,7 +47,7 @@ M.config = function()
 
 	local lspconfig = require("lspconfig")
 
-  -- Configure `pyright` for python
+	-- Configure `pyright` for python
 	local python_root_files = {
 		"pyproject.toml",
 		"setup.py",
@@ -55,32 +55,15 @@ M.config = function()
 		"requirements.txt",
 		"Pipfile",
 		"pyrightconfig.json",
-		"Makefile",
 		".git",
 		".mypy_cache",
+		".venv",
+		"venv",
 	}
 	lspconfig["pyright"].setup({
 		on_attach = attach,
 		root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
 	})
-
-	-- Configure `ruff-lsp` for python
-	local configs = lspconfig.configs
-	if not configs.ruff_lsp then
-		configs.ruff_lsp = {
-			default_config = {
-				cmd = { "ruff-lsp" },
-				filetypes = { "python" },
-				root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
-				init_options = {
-					settings = {
-						args = {},
-					},
-				},
-			},
-		}
-	end
-	lspconfig["ruff_lsp"].setup({ on_attach = attach })
 
 	-- 重写 lvim.lsp 的默认配置
 	lvim.lsp.diagnostics.float.focusable = true
