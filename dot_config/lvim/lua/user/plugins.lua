@@ -449,6 +449,13 @@ M.config = function()
 		-- 		require("mini.cursorword").setup()
 		-- 	end,
 		-- },
+		-- 显示光标所在单词
+		{
+			"echasnovski/mini.cursorword",
+			config = function()
+				require("mini.cursorword").setup()
+			end,
+		},
 		--------------
 		-- 其他功能 --
 		--------------
