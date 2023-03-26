@@ -435,18 +435,23 @@ M.config = function()
 				return (_time.hour >= 0 and _time.hour < 15)
 			end,
 		},
-		-- {
-		-- 	"echasnovski/mini.animate",
-		-- 	config = function()
-		-- 		require("mini.animate").setup()
-		-- 	end,
-		-- },
-		-- {
-		-- 	"echasnovski/mini.cursorword",
-		-- 	config = function()
-		-- 		require("mini.cursorword").setup()
-		-- 	end,
-		-- },
+		-- 动画效果
+		{
+			"echasnovski/mini.animate",
+			config = function()
+				require("mini.animate").setup({
+					resize = {
+						enable = false,
+					},
+					open = {
+						enable = false,
+					},
+					close = {
+						enable = false,
+					},
+				})
+			end,
+		},
 		-- 显示光标所在单词
 		{
 			"echasnovski/mini.cursorword",
