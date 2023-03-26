@@ -6,8 +6,6 @@ require("user.alpha").config()
 lvim.colorscheme = "default"
 vim.opt.termguicolors = true
 lvim.builtin.bufferline.options.always_show_bufferline = true
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_assume_mapped = true
 
 require("user.statusline").config()
 
