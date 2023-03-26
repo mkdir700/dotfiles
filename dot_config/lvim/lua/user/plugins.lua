@@ -5,7 +5,7 @@ M.config = function()
 		--------------
 		-- 屏幕滚动 --
 		--------------
-		-- 用于在屏幕上滚动的插件
+		-- 滚动动画
 		{
 			"karb94/neoscroll.nvim",
 			event = "WinScrolled",
@@ -360,7 +360,7 @@ M.config = function()
 		-- 界面美化 --
 		--------------
 		{ "p00f/nvim-ts-rainbow" },
-		-- 主题
+		-- 实时渲染颜色
 		{
 			"norcalli/nvim-colorizer.lua",
 			config = function()
@@ -416,10 +416,8 @@ M.config = function()
 					theme_style = "dark",
 					function_style = "italic",
 					sidebars = { "qf", "vista_kind", "terminal", "packer" },
-
 					-- Change the "hint" color to the "orange" color, and make the "error" color bright red
 					-- colors = { hint = "orange", error = "#ff0000" },
-
 					-- Overwrite the highlight groups
 					-- overrides = function(c)
 					-- 	return {
