@@ -6,6 +6,7 @@ M.config = function()
 	lvim.builtin.terminal.hide_numbers = false
 	lvim.builtin.terminal.auto_scroll = false
 	lvim.builtin.terminal.shade_terminals = false
+	lvim.builtin.terminal.persist_mode = true
 	lvim.builtin.which_key.mappings.a.e = {
 		"<CMD>ToggleTermSendCurrentLine<CR>",
 		"Send current line to terminal",
@@ -30,7 +31,7 @@ M.config = function()
 			-- 只在打开非 lazygit 终端时设置映射
 			vim.keymap.set("t", "<esc>", "<C-\\><C-n>", opts)
 			vim.keymap.set("t", "jk", "<C-\\><C-n>", opts)
-      vim.keymap.set("t", "<C-S-u>", "<C-\\><C-n><C-u>", opts)
+			vim.keymap.set("t", "<C-S-u>", "<C-\\><C-n><C-u>", opts)
 			vim.keymap.set({ "t", "n" }, "<C-k>", "<Cmd>wincmd p<CR>", opts)
 			-- <C-l> 清空终端
 			vim.api.nvim_set_keymap(
