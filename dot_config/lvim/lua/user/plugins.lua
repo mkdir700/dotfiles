@@ -449,6 +449,9 @@ M.config = function()
 					close = {
 						enable = false,
 					},
+					scroll = {
+						enable = false,
+					},
 				})
 			end,
 		},
