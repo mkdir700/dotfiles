@@ -5,6 +5,7 @@ require("user.alpha").config()
 -- In order to disable lunarvim's default colorscheme
 lvim.colorscheme = "default"
 vim.opt.termguicolors = true
+vim.o.jumpoptions = "stack"
 lvim.builtin.bufferline.options.always_show_bufferline = true
 
 require("user.statusline").config()
@@ -48,4 +49,3 @@ require("user.keybindings").config()
 require("user.config.toggleterm").config()
 
 require("user.telescope").config()
-
