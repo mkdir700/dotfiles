@@ -222,6 +222,44 @@ M.config = function()
 	local cmp = require("cmp")
 	local luasnip = require("luasnip")
 	local lccm = require("lvim.core.cmp").methods
+
+	-- 检查当前光标的后一位是否是 pair
+	-- @return bool
+	local function is_next_char_pair()
+		local line = vim.api.nvim_get_current_line()
+		local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+		local after = line:sub(col + 1, -1)
+		local closers = { ")", "]", "}", ">", "'", '"', "`", "," }
+		for _, pair in ipairs(closers) do
+			if after:sub(1, #pair) == pair then
+				return true
+			end
+		end
+		return false
+	end
+
+	-- 跳出 pair
+	local function escape_pair()
+		local closers = { ")", "]", "}", ">", "'", '"', "`", "," }
+		local line = vim.api.nvim_get_current_line()
+		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+		local after = line:sub(col + 1, -1)
+		local closer_col = #after + 1
+		local closer_i = nil
+		for i, closer in ipairs(closers) do
+			local cur_index, _ = after:find(closer)
+			if cur_index and (cur_index < closer_col) then
+				closer_col = cur_index
+				closer_i = i
+			end
+		end
+		if closer_i then
+			vim.api.nvim_win_set_cursor(0, { row, col + closer_col })
+		else
+			vim.api.nvim_win_set_cursor(0, { row, col + 1 })
+		end
+	end
+
 	lvim.builtin.cmp.mapping = cmp.mapping.preset.insert({
 		["<C-f>"] = nil,
 		["<C-u>"] = cmp.mapping.scroll_docs(-4),
@@ -244,7 +282,9 @@ M.config = function()
 			end
 		end),
 		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
+			if is_next_char_pair() then
+				escape_pair()
+			elseif cmp.visible() then
 				cmp.select_next_item()
 			elseif luasnip.expand_or_locally_jumpable() then
 				luasnip.expand_or_jump()
