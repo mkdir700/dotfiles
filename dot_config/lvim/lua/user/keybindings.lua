@@ -384,6 +384,14 @@ M.config = function()
 	lvim.builtin.which_key.mappings["h"] = nil
 	lvim.builtin.which_key.mappings["e"] = nil -- FIXME: 没有效果
 
+	--------------
+	-- 缓冲区按键 --
+	--------------
+	lvim.builtin.which_key.mappings.b.o = {
+		"<cmd>BufferLineCloseLeft<cr><cmd>BufferLineCloseRight<cr>",
+		"Close all but current",
+	}
+
 	vim.cmd([[
 function! C_Right() abort
   let left_text = getline('.')[getcurpos()[2]-1:]
