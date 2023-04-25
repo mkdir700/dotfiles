@@ -33,6 +33,11 @@ M.config = function()
 			vim.keymap.set("t", "jk", "<C-\\><C-n>", opts)
 			vim.keymap.set("t", "<C-S-u>", "<C-\\><C-n><C-u>", opts)
 			vim.keymap.set({ "t", "n" }, "<C-k>", "<Cmd>wincmd p<CR>", opts)
+			vim.keymap.set("t", "<M-w>", function()
+				local picker = require("window-picker")
+				local picked_window_id = picker.pick_window() or vim.api.nvim_get_current_win()
+				vim.api.nvim_set_current_win(picked_window_id)
+			end, { desc = "Pick a window in ToggleTerm" })
 			-- <C-l> 清空终端
 			vim.api.nvim_set_keymap(
 				"t",

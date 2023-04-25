@@ -548,6 +548,12 @@ M.config = function()
 				})
 			end,
 		},
+		{
+			"IndianBoy42/nvim-window-picker",
+			config = function()
+				require("window-picker").setup()
+			end,
+		},
 		-- Python 虚拟环境
 		{
 			"jmcantrell/vim-virtualenv",

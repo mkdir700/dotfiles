@@ -31,8 +31,8 @@ M.config = function()
 	--------------
 	-- 窗口(widnows)管理 --
 	--------------
-	map("n", "<M-K>", ":resize +2<CR>")
-	map("n", "<M-J>", ":resize -2<CR>")
+	map("n", "<M-}>", ":resize +2<CR>")
+	map("n", "<M-{>", ":resize -2<CR>")
 	map("n", "<M-]>", ":vertical resize -2<CR>")
 	map("n", "<M-[>", ":vertical resize +2<CR>")
 	map("n", "_", ":sp<CR>")
@@ -41,6 +41,12 @@ M.config = function()
 	vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 	vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
 	vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
+	-- select window
+	vim.keymap.set("n", "<M-w>", function()
+		local picker = require("window-picker")
+		local picked_window_id = picker.pick_window() or vim.api.nvim_get_current_win()
+		vim.api.nvim_set_current_win(picked_window_id)
+	end, { desc = "Pick a window" })
 
 	--------------
 	-- 光标(cursor)移动 --
