@@ -606,6 +606,13 @@ M.config = function()
 			},
 		},
 		{
+			"Bryley/neoai.nvim",
+			require = { "MunifTanjim/nui.nvim" },
+			config = function()
+				require("user.config.neoai").config()
+			end,
+		},
+		{
 			"0x100101/lab.nvim",
 			run = "cd js && npm ci",
 			requires = { "nvim-lua/plenary.nvim" },
