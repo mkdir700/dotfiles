@@ -605,6 +605,14 @@ M.config = function()
 				"nvim-telescope/telescope.nvim",
 			},
 		},
+		{
+			"0x100101/lab.nvim",
+			run = "cd js && npm ci",
+			requires = { "nvim-lua/plenary.nvim" },
+			config = function()
+				require("user.config.lab").config()
+			end,
+		},
 	}
 end
 
