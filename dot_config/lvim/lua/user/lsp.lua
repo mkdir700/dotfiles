@@ -43,7 +43,6 @@ M.config = function()
 		})
 		common_on_attach(client, bufnr)
 	end
-	local common_on_attach = require("lvim.lsp").common_on_attach
 
 	local lspconfig = require("lspconfig")
 
@@ -73,8 +72,6 @@ M.config = function()
 		filetypes = { "python", "py" },
 	})
 
-	-- 使用 pip 判断当前环境是否安装了 ruff-lsp
-
 	lspconfig["ruff_lsp"].setup({
 		on_attach = common_on_attach,
 		root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
@@ -83,6 +80,7 @@ M.config = function()
 
 	-- 重写 lvim.lsp 的默认配置
 	lvim.lsp.diagnostics.float.focusable = true
+
 	-- 解决 cpp offsetEncoding 编码警告问题
 	-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428#issuecomment-997226723
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -91,6 +89,33 @@ M.config = function()
 		on_attach = common_on_attach,
 		capabilities = capabilities,
 		filetypes = { "c", "cpp", "objc", "objcpp", "cc", "h" },
+	})
+
+	-- lua LSP
+	lspconfig.lua_ls.setup({
+		settings = {
+			Lua = {
+				runtime = {
+					-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+					version = "LuaJIT",
+				},
+				diagnostics = {
+					-- Get the language server to recognize the `vim` global
+					globals = { "vim" },
+				},
+				workspace = {
+					-- Make the server aware of Neovim runtime files
+					library = vim.api.nvim_get_runtime_file("", true),
+					checkThirdParty = false,
+					maxPreload = 5000,
+					preloadFileSize = 10000,
+				},
+				-- Do not send telemetry data containing a randomized but unique identifier
+				telemetry = {
+					enable = false,
+				},
+			},
+		},
 	})
 end
 
