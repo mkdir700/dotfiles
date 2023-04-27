@@ -148,6 +148,10 @@ M.config = function()
 				require("user.config.visual-multi").config()
 			end,
 		},
+		-- Bullets.vim是一个用于自动化项目符号列表的Vim插件
+		{
+			"dkarter/bullets.vim",
+		},
 		-- 累加/累减
 		{
 			"monaqa/dial.nvim",
