@@ -205,6 +205,13 @@ M.config = function()
 			"tpope/vim-surround",
 			keys = { "c", "d", "y" },
 		},
+    -- 根据Treesitter的抽象语法树在文档中导航。进入、退出、跳过和返回。
+		{
+			"ziontee113/syntax-tree-surfer",
+			config = function()
+				require("user.config.syntax-tree-surfer").config()
+			end,
+		},
 		--------------
 		-- 语言服务 --
 		--------------
