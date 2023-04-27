@@ -43,7 +43,7 @@ M.config = function()
 		})
 		common_on_attach(client, bufnr)
 	end
-	local attach = require("lvim.lsp").common_on_attach
+	local common_on_attach = require("lvim.lsp").common_on_attach
 
 	local lspconfig = require("lspconfig")
 
@@ -60,8 +60,22 @@ M.config = function()
 		".venv",
 		"venv",
 	}
+
 	lspconfig["pyright"].setup({
-		on_attach = attach,
+		on_attach = function(client, bufnr)
+			common_on_attach(client, bufnr)
+			-- 禁用 pyright 的 document_formatting，使用 null-ls 的 document_formatting
+			client.server_capabilities.document_formatting = false
+			-- 禁用 pyright 的 hoverProvider，使用 ruff-lsp 的 hoverProvider
+			-- client.server_capabilities.hoverProvider = false
+		end,
+		root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
+	})
+
+  -- 使用 pip 判断当前环境是否安装了 ruff-lsp
+
+	lspconfig["ruff_lsp"].setup({
+		on_attach = common_on_attach,
 		root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
 	})
 
@@ -72,7 +86,7 @@ M.config = function()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities.offsetEncoding = { "utf-16" }
 	lspconfig["clangd"].setup({
-		on_attach = attach,
+		on_attach = common_on_attach,
 		capabilities = capabilities,
 	})
 end
