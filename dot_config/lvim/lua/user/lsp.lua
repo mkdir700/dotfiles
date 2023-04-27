@@ -70,13 +70,15 @@ M.config = function()
 			-- client.server_capabilities.hoverProvider = false
 		end,
 		root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
+		filetypes = { "python", "py" },
 	})
 
-  -- 使用 pip 判断当前环境是否安装了 ruff-lsp
+	-- 使用 pip 判断当前环境是否安装了 ruff-lsp
 
 	lspconfig["ruff_lsp"].setup({
 		on_attach = common_on_attach,
 		root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
+		filetypes = { "python", "py" },
 	})
 
 	-- 重写 lvim.lsp 的默认配置
@@ -88,6 +90,7 @@ M.config = function()
 	lspconfig["clangd"].setup({
 		on_attach = common_on_attach,
 		capabilities = capabilities,
+		filetypes = { "c", "cpp", "objc", "objcpp", "cc", "h" },
 	})
 end
 
