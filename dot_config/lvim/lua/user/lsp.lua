@@ -1,6 +1,9 @@
 local M = {}
 
 M.config = function()
+	-- 用于 Python 虚拟环境
+	require("venom").setup()
+
 	-- ---WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 	-- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
 	require("lvim.lsp.null-ls.linters").setup({
@@ -79,7 +82,7 @@ M.config = function()
 	})
 
 	-- 重写 lvim.lsp 的默认配置
-	lvim.lsp.diagnostics.float.focusable = true
+	-- lvim.lsp.diagnostics.float.focusable = true
 
 	-- 解决 cpp offsetEncoding 编码警告问题
 	-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428#issuecomment-997226723
@@ -92,22 +95,25 @@ M.config = function()
 	})
 
 	-- lua LSP
-	lspconfig.lua_ls.setup({
+	lspconfig["lua_ls"].setup({
 		settings = {
 			Lua = {
 				runtime = {
 					-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
 					version = "LuaJIT",
+					special = {
+						reload = "require",
+					},
 				},
 				diagnostics = {
 					-- Get the language server to recognize the `vim` global
-					globals = { "vim" },
+					globals = { "vim", "lvim", "packer_plugins", "reload" },
 				},
 				workspace = {
 					-- Make the server aware of Neovim runtime files
 					library = vim.api.nvim_get_runtime_file("", true),
 					checkThirdParty = false,
-					maxPreload = 5000,
+					maxPreload = 9999,
 					preloadFileSize = 10000,
 				},
 				-- Do not send telemetry data containing a randomized but unique identifier
