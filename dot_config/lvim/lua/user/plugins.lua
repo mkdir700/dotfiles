@@ -205,7 +205,7 @@ M.config = function()
 			"tpope/vim-surround",
 			keys = { "c", "d", "y" },
 		},
-    -- 根据Treesitter的抽象语法树在文档中导航。进入、退出、跳过和返回。
+		-- 根据Treesitter的抽象语法树在文档中导航。进入、退出、跳过和返回。
 		{
 			"ziontee113/syntax-tree-surfer",
 			config = function()
@@ -565,28 +565,13 @@ M.config = function()
 				require("window-picker").setup()
 			end,
 		},
-		-- Python 虚拟环境
-		{
-			"jmcantrell/vim-virtualenv",
-		},
-		{
-			"rafi/vim-venom",
-			ft = { "python" },
-			config = function()
-				require("venom").setup()
-				-- 重启 LSP 服务后生效
-				vim.cmd([[ LspRestart ]])
-			end,
-		},
 		-- Enhanced gF command for Python
 		{
 			"sychen52/gF-python-traceback",
 		},
 		-- Session 会话管理
 		{
-
 			"olimorris/persisted.nvim",
-			--module = "persisted", -- For lazy loading
 			config = function()
 				require("persisted").setup({
 					command = "VimLeavePre",
@@ -595,7 +580,6 @@ M.config = function()
 			end,
 		},
 		-- AI 代码补全
-		-- { "github/copilot.vim", run = ":Copilot setup" },
 		{
 			"zbirenbaum/copilot.lua",
 			cmd = "Copilot",
@@ -611,17 +595,6 @@ M.config = function()
 		-- 		require("copilot_cmp").setup()
 		-- 	end,
 		-- },
-		{
-			"jackMort/ChatGPT.nvim",
-			config = function()
-				require("chatgpt").setup({})
-			end,
-			requires = {
-				"MunifTanjim/nui.nvim",
-				"nvim-lua/plenary.nvim",
-				"nvim-telescope/telescope.nvim",
-			},
-		},
 		{
 			"Bryley/neoai.nvim",
 			require = { "MunifTanjim/nui.nvim" },
