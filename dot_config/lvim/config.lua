@@ -6,7 +6,10 @@ require("user.alpha").config()
 lvim.colorscheme = "default"
 vim.opt.termguicolors = true
 vim.o.jumpoptions = "stack"
-lvim.builtin.bufferline.options.always_show_bufferline = true
+lvim.builtin.bufferline.options.always_show_bufferline = false
+-- 启用拼写检查器和单词补全
+vim.opt.spell = true
+vim.opt.spelllang = { "en_us" }
 
 require("user.statusline").config()
 
@@ -57,8 +60,6 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { 
 require("user.treesitter").config()
 
 require("user.lsp").config()
-
-require("user.autopairs").config()
 
 require("user.plugins").config()
 
