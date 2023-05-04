@@ -3,7 +3,8 @@ local M = {}
 M.config = function()
 	lvim.builtin.lualine.options = {
 		globalstatus = true,
-		section_separators = { left = "", right = "" },
+		component_separators = { left = "", right = "" },
+		section_separators = { left = " ", right = " " },
 	}
 
 	local components = require("lvim.core.lualine.components")
@@ -11,7 +12,6 @@ M.config = function()
 		{
 			" ",
 			type = "stl",
-			-- color = { fg = "#b3e1a3" },
 		},
 	}
 	lvim.builtin.lualine.sections.lualine_b = {
