@@ -574,7 +574,20 @@ M.config = function()
 			"olimorris/persisted.nvim",
 			config = function()
 				require("persisted").setup({
-					command = "VimLeavePre",
+					telescope = {
+						reset_prompt_after_deletion = false,
+						after_source = function(param)
+							vim.api.nvim_command("%bd")
+							local path = param.dir_path
+							if string.find(path, "/") ~= 1 then
+								vim.api.nvim_command("cd " .. vim.fn.expand("~") .. "/" .. path)
+								vim.api.nvim_command("tcd " .. vim.fn.expand("~") .. "/" .. path)
+							else
+								vim.api.nvim_command("cd " .. path)
+								vim.api.nvim_command("tcd " .. path)
+							end
+						end,
+					},
 				})
 				require("telescope").load_extension("persisted") -- To load the telescope extension
 			end,
