@@ -163,7 +163,7 @@ M.config = function()
 		{
 			"ojroques/vim-oscyank",
 			config = function()
-				lvim.builtin.which_key.vmappings["y"] = { ":OSCYank<CR>", "Copy to clipboard(Remote)" }
+				lvim.builtin.which_key.vmappings["y"] = { ":OSCYankVisual<CR>", "Copy to clipboard(Remote)" }
 			end,
 		},
 		--------------
