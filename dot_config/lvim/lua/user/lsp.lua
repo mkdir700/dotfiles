@@ -22,7 +22,7 @@ M.config = function()
 		{ filetypes = { "sh" }, command = "shfmt", extra_args = { "-i", "2" } },
 		{ filetypes = { "cmake" }, command = "cmake_format" },
 		{ filetype = { "cpp", "c", "objc", "objcpp" }, command = "clang-format" },
-		{ filetypes = { "go" }, command = "gofmt" },
+		{ filetypes = { "go" }, command = "gopls" },
 		{ filetypes = { "python" }, command = "isort" },
 		{ filetypes = { "python" }, command = "black" },
 		{ filetypes = { "lua" }, command = "stylua" },
