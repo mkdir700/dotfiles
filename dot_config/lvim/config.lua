@@ -8,7 +8,7 @@ vim.opt.termguicolors = true
 vim.o.jumpoptions = "stack"
 lvim.builtin.bufferline.options.always_show_bufferline = false
 -- 启用拼写检查器和单词补全
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.spelllang = { "en_us" }
 
 require("user.statusline").config()
