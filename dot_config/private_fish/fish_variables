@@ -10,8 +10,8 @@ SETUVAR Z_CMD:z
 SETUVAR Z_DATA:/Users/mark/\x2elocal/share/z/data
 SETUVAR Z_DATA_DIR:/Users/mark/\x2elocal/share/z
 SETUVAR Z_EXCLUDE:\x5e/Users/mark\x24
-SETUVAR --export __ABBR_TIPS_KEYS:a__cls\x1ea__l\x1ea__la\x1ea__lla\x1ea__ls\x1ea__lt\x1ea__vv
-SETUVAR --export __ABBR_TIPS_VALUES:clear\x1elsd\x1elsd\x20\x2da\x1elsd\x20\x2dla\x1elsd\x1elsd\x20\x2d\x2dtree\x1elvim
+SETUVAR --export __ABBR_TIPS_KEYS:a__cls\x1ea__l\x1ea__la\x1ea__lla\x1ea__ls\x1ea__lt\x1ea__vv\x1ea__g\x2b\x2b\x1ea__py3\x1ea__lg
+SETUVAR --export __ABBR_TIPS_VALUES:clear\x1elsd\x1elsd\x20\x2da\x1elsd\x20\x2dla\x1elsd\x1elsd\x20\x2d\x2dtree\x1elvim\x1eg\x2b\x2b\x1epython3\x1elazygit
 SETUVAR __fish_initialized:3400
 SETUVAR _fisher_acomagu_2F_fish_2D_async_2D_prompt_files:\x7e/\x2econfig/fish/conf\x2ed/__async_prompt\x2efish
 SETUVAR _fisher_gazorby_2F_fish_2D_abbreviation_2D_tips_files:\x7e/\x2econfig/fish/functions/__abbr_tips_bind_newline\x2efish\x1e\x7e/\x2econfig/fish/functions/__abbr_tips_bind_space\x2efish\x1e\x7e/\x2econfig/fish/functions/__abbr_tips_clean\x2efish\x1e\x7e/\x2econfig/fish/functions/__abbr_tips_init\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/abbr_tips\x2efish
@@ -70,7 +70,7 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/opt/homebrew/sbin\x1e/usr/local/bin\x1e/opt/homebrew/opt/sphinx\x2ddoc/bin\x1e/opt/homebrew/bin\x1e/Users/wuyuhang/\x2elocal/pipx/venvs/poetry\x1e/Users/wuyuhang/\x2elocal/pipx/venvs/poetry/bin\x1e/Users/wuyuhang/Library/Python/3\x2e8/bin\x1e/Users/mark/\x2ecargo/bin\x1e/Users/mark/\x2elocal/bin\x1e/Users/mark/Library/Python/3\x2e10/bin
+SETUVAR fish_user_paths:/opt/homebrew/opt/llvm/bin\x1e/opt/homebrew/sbin\x1e/usr/local/bin\x1e/opt/homebrew/opt/sphinx\x2ddoc/bin\x1e/opt/homebrew/bin\x1e/Users/wuyuhang/\x2elocal/pipx/venvs/poetry\x1e/Users/wuyuhang/\x2elocal/pipx/venvs/poetry/bin\x1e/Users/wuyuhang/Library/Python/3\x2e8/bin\x1e/Users/mark/\x2ecargo/bin\x1e/Users/mark/\x2elocal/bin\x1e/Users/mark/Library/Python/3\x2e10/bin
 SETUVAR http_proxy:http\x3a//127\x2e0\x2e0\x2e1\x3a7890
 SETUVAR https_proxy:http\x3a//127\x2e0\x2e0\x2e1\x3a7890
 SETUVAR tide_aws_bg_color:FF9900
