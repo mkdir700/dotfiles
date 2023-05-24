@@ -48,6 +48,7 @@ M.config = function()
 			setup = function()
 				require("user.setup.matchup").setup()
 			end,
+			commit = "1e276be"
 		},
 		-- 在非跳转下，查看目标行
 		{

@@ -2,6 +2,7 @@ local M = {}
 
 M.config = function()
 	-- 用于 Python 虚拟环境
+	require("neoconf").setup()
 	require("venom").setup()
 
 	-- ---WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!

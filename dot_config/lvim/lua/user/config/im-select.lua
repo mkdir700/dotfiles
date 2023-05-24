@@ -10,7 +10,7 @@ M.config = function()
 		default_im_select = "com.apple.keylayout.ABC",
 
 		-- Set to 1 if you don't want restore IM status when `InsertEnter`
-		disable_auto_restore = 1,
+		set_previous_events = 1,
 
 		-- Can be binary's name or binary's full path,
 		-- e.g. 'im-select' or '/usr/local/bin/im-select'
