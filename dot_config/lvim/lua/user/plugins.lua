@@ -48,7 +48,7 @@ M.config = function()
 			setup = function()
 				require("user.setup.matchup").setup()
 			end,
-			commit = "1e276be"
+			commit = "1e276be",
 		},
 		-- 在非跳转下，查看目标行
 		{
@@ -96,6 +96,13 @@ M.config = function()
 					"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
 					{ noremap = true }
 				)
+			end,
+		},
+		-- 展示变量被实现的次数和不引用的次数
+		{
+			"VidocqH/lsp-lens.nvim",
+			config = function()
+				require("lsp-lens").setup({})
 			end,
 		},
 		--------------
