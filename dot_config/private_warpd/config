@@ -1,2 +1,7 @@
-repeat_interval:200
-speed: 100
+repeat_interval: 200
+speed: 150
+hint_border_radius: 5
+cursor_size: 10
+scroll_down: u
+scroll_up: d
+oneshot_buttons: q w e

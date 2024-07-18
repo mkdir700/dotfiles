@@ -46,3 +46,11 @@ shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
 ctrl + alt - q : brew services stop yabai
 ctrl + alt - s : brew services start yabai
 ctrl + alt - r : brew services restart yabai
+
+
+# ========== warpd ===========
+
+cmd + alt - x : warpd --hint2 --config ~/.config/warpd/config --record
+cmd + alt - c : warpd --normal --config ~/.config/warpd/config --record
+
+
