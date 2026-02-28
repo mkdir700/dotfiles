@@ -1,6 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 #
+[ -f ~/.env ] && source ~/.env
+
 # ---- PATH 去重（zsh 最佳实践）----
 typeset -U path PATH
 
@@ -281,6 +283,7 @@ alias ll='exa --icons --group-directories-first --sort=modified --long'
 alias l='exa --icons --group-directories-first --sort=modified --long --level=1'
 alias cls='clear'
 alias lz='lazygit'
+alias cz='chezmoi'
 
 ## NVM
 export NVM_DIR="$HOME/.nvm"
