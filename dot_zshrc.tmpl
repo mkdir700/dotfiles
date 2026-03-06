@@ -17,8 +17,14 @@ path=(
 
   # Node
   $HOME/.npm-global/bin
+{{- if eq .chezmoi.os "darwin" }}
   $HOME/Library/pnpm
+{{- end }}
   $HOME/.bun/bin
+{{- if eq .chezmoi.os "linux" }}
+  $HOME/.local/share/fnm
+  $HOME/.opencode/bin
+{{- end }}
 
   # Solana toolchain
   $HOME/.local/share/solana/install/active_release/bin
@@ -30,8 +36,10 @@ path=(
   $HOME/go/bin
 
   # Python user scripts
+{{- if eq .chezmoi.os "darwin" }}
   $HOME/Library/Python/3.10/bin
   $HOME/Library/Python/3.8/bin
+{{- end }}
 
   # Pixi
   $HOME/.pixi/bin
@@ -45,13 +53,23 @@ path=(
   $HOME/.x-cmd.root/local/data/pkg/sphere/X/l/j/h/bin
   $HOME/.x-cmd.root/bin
 
+{{- if eq .chezmoi.os "darwin" }}
   # LLVM (brew llvm toolchain)
   /opt/homebrew/opt/llvm/bin
 
   # Homebrew Apple Silicon
   /opt/homebrew/bin
+{{- end }}
 
-  # Intel brew fallback
+{{- if eq .chezmoi.os "linux" }}
+  # Linuxbrew
+  /home/linuxbrew/.linuxbrew/bin
+
+  # Neovim (manual install)
+  /opt/nvim-linux-x86_64/bin
+{{- end }}
+
+  # Shared fallback
   /usr/local/bin
 
   $path
@@ -132,6 +150,13 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# Initialize fnm so node/npm/codex from the active Node version are on PATH.
+{{- if eq .chezmoi.os "linux" }}
+if command -v fnm >/dev/null 2>&1; then
+  eval "$(fnm env --use-on-cd --shell zsh 2>/dev/null)"
+fi
+{{- end }}
+
 # OpenSpec shell completions
 fpath=("$HOME/.zsh/completions" $fpath)
 
@@ -191,7 +216,9 @@ zinit light zsh-users/zsh-completions
 zinit light rupa/z
 
 # fzf shell integration
-eval "$(fzf --zsh)"
+if command -v fzf >/dev/null 2>&1; then
+  eval "$(fzf --zsh)"
+fi
 
 eval "$(starship init zsh)"
 ### End of Zinit's installer chunk
@@ -300,7 +327,9 @@ fi
 # OpenClaw Completion
 [ -f "$HOME/.openclaw/completions/openclaw.zsh" ] && source "$HOME/.openclaw/completions/openclaw.zsh"
 
+{{- if eq .chezmoi.os "darwin" }}
 # Wake external/internal display (macOS)
 wake-display() {
   caffeinate -u -t 2
 }
+{{- end }}

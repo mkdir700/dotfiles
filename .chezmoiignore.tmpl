@@ -1,0 +1,15 @@
+{{- if ne .chezmoi.os "darwin" }}
+# macOS-only configs
+# Hammerspoon automation (macOS app + hs APIs)
+dot_hammerspoon
+
+# macOS window management stack
+dot_config/yabai
+dot_config/skhd
+
+# Karabiner is macOS-only
+dot_config/private_karabiner
+
+# Generated on macOS and contains /Users + Homebrew paths
+dot_config/private_fish/fish_variables
+{{- end }}
