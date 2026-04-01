@@ -1,0 +1,75 @@
+{
+  "providers": {
+    "minimax": {
+      "baseUrl": "https://cc.z2blog.com",
+      "apiKey": "env:CUSTOM_MINIMAX_API_KEY",
+      "api": "anthropic-messages",
+      "models": [
+        {
+          "id": "claude-opus-4-6",
+          "name": "Claude 4.6",
+          "reasoning": true,
+          "input": ["text"],
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+          "contextWindow": 200000,
+          "maxTokens": 8192
+        }
+      ]
+    },
+    "custom-claude-code": {
+      "baseUrl": "https://cc.z2blog.com",
+      "apiKey": "env:CUSTOM_CLAUDE_CODE_API_KEY",
+      "api": "anthropic-messages",
+      "models": [
+        {
+          "id": "claude-opus-4-6",
+          "name": "Claude Opus 4.6",
+          "reasoning": true,
+          "input": ["text"],
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+          "contextWindow": 1000000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "claude-sonnet-4-6",
+          "name": "Claude Sonnet 4.6",
+          "reasoning": true,
+          "input": ["text"],
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+          "contextWindow": 1000000,
+          "maxTokens": 16384
+        },
+        {
+          "id": "claude-haiku-4-5",
+          "name": "Claude haiku 4.5",
+          "reasoning": false,
+          "input": ["text"],
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+          "contextWindow": 200000,
+          "maxTokens": 8192
+        }
+      ]
+    },
+    "custom-openai": {
+      "baseUrl": "https://cc.z2blog.com/v1",
+      "apiKey": "env:CUSTOM_OPENAI_API_KEY",
+      "api": "openai-responses",
+      "models": [
+        {
+          "id": "gpt-5.4",
+          "name": "gpt-5.4",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 1000000,
+          "maxTokens": 16384,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "defaultProvider": "minimax",
+  "defaultModel": "claude-opus-4-6",
+  "defaultThinkingLevel": "off",
+  "quietStartup": true,
+  "collapseChangelog": true,
+  "lastChangelogVersion": "0.57.1",
+  "editorPaddingX": 1,
+  "hideThinkingBlock": false,
+  "enabledModels": [
+    "custom-claude-code/claude-opus-4-6",
+    "minimax/claude-opus-4-6",
+    "openai-codex/gpt-5.4"
+  ],
+  "editMode": "hashline"
+}
