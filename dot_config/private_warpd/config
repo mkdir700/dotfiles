@@ -1,7 +1,135 @@
-repeat_interval: 200
-speed: 150
-hint_border_radius: 5
-cursor_size: 10
-scroll_down: u
-scroll_up: d
-oneshot_buttons: q w e
+# ==========================================================
+# warpd — vim-like config
+# ==========================================================
+
+# ─── Global activation hotkeys ───────────────────────────
+# All binds use Hyper (C-A-M-S-*) — your Karabiner remaps
+# Right Command → Hyper, so "Right Cmd + f" reaches here.
+# Single-key triggers are produced by Karabiner (see below),
+# not by warpd itself.
+#
+# Main workflow (mouseless-style):
+#   hint2_oneshot_key = two-stage hint + auto left-click
+#   hint_oneshot_key  = one-stage hint  + auto left-click
+
+# PRIMARY: hint2 + auto left-click (mouseless default)
+hint2_oneshot_key:       C-A-M-S-f
+# quicker, coarser: one-stage hint + auto click
+hint_oneshot_key:        C-A-M-S-d
+# fall-back: drop into normal mode
+activation_key:          C-A-M-S-c
+grid_activation_key:     C-A-M-S-g
+history_activation_key:  C-A-M-S-h
+screen_activation_key:   C-A-M-S-s
+# hint without auto-click (select only)
+hint_activation_key:     C-A-M-S-a
+hint2_activation_key:    C-A-M-S-A
+
+
+# ─── Normal mode: movement (vim hjkl, HML, 0$) ───────────
+left:    h
+down:    j
+up:      k
+right:   l
+top:     H
+middle:  M
+bottom:  L
+start:   0
+end:     $
+
+accelerator:  a
+decelerator:  A
+
+
+# ─── Normal mode: mode switches ──────────────────────────
+hint:           f
+hint2:          F
+grid:           g
+history:        ;
+screen:         C-w
+drag:           v
+copy_and_exit:  y
+print:          P
+exit:           esc
+
+
+# ─── Normal mode: clicks ─────────────────────────────────
+buttons:          m , .
+drag_button:      1
+oneshot_buttons:  q w e
+
+
+# ─── Normal mode: history (vim jump list) ────────────────
+hist_back:     C-o
+hist_forward:  C-i
+
+
+# ─── Normal mode: scroll ─────────────────────────────────
+scroll_down:   d
+scroll_up:     u
+
+
+# ─── Hint mode ───────────────────────────────────────────
+hint_chars:         asdfghjkl;qwertyuiopzxcvbnm
+hint_exit:          esc
+hint_undo:          backspace
+hint_undo_all:      C-u
+
+hint_font:          Menlo
+hint_size:          22
+hint_border_radius: 4
+hint_bgcolor:       #28282880
+hint_fgcolor:       #fabd2f
+
+
+# ─── Hint2 (fine-tune) ───────────────────────────────────
+hint2_chars:       hjklasdfg
+hint2_grid_size:   3
+hint2_size:        22
+hint2_gap_size:    1
+
+
+# ─── Grid mode (vim ergonomics) ──────────────────────────
+grid_keys:         t y g h
+
+grid_left:         h
+grid_down:         j
+grid_up:           k
+grid_right:        l
+
+# grid_cut_* needs warpd master (post-v1.3.5); skipped on this install
+
+grid_exit:         esc
+grid_nr:           2
+grid_nc:           2
+grid_size:         3
+grid_border_size:  0
+grid_color:        #28282880
+grid_border_color: #fabd2f
+
+
+# ─── Screen selection ────────────────────────────────────
+screen_chars:      asdfjkl;
+
+
+# ─── Tuning ──────────────────────────────────────────────
+speed:                     280
+max_speed:                 2200
+acceleration:              900
+accelerator_acceleration:  3500
+decelerator_speed:         40
+repeat_interval:           18
+
+scroll_speed:        400
+scroll_max_speed:    10000
+scroll_acceleration: 1800
+scroll_deceleration: -3800
+
+
+# ─── Visuals ─────────────────────────────────────────────
+indicator:        topright
+indicator_color:  #fabd2f
+indicator_size:   10
+
+cursor_color:     #fb4934
+cursor_size:      6

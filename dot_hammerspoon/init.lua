@@ -72,7 +72,6 @@ for _, app in ipairs(applications) do
 	end)
 end
 
-
 -- 🔄 重新加载 Hammerspoon 配置（快捷键：ctrl+alt+cmd+shift+R）
 hs.hotkey.bind({ "ctrl", "alt", "cmd", "shift" }, "R", function()
 	hs.reload()
@@ -148,6 +147,25 @@ hs.hotkey.bind({ "ctrl", "alt", "cmd", "shift" }, "P", function()
 	win:raise()
 	ensurePinTimer()
 	hs.alert.show("已置顶（再次按下可取消）")
+end)
+
+-- ⑤ warpd normal mode: F17 (from Karabiner right_option tap)
+hs.hotkey.bind({}, "f17", function()
+	hs.task.new("/usr/local/bin/warpd", nil, { "--normal" }):start()
+end)
+
+-- ④ warpd trigger: F18 (from Karabiner right_command tap) → hint2 + auto click
+-- Click is fired by Hammerspoon *after* warpd exits, to dodge warpd's
+-- CGEventGetLocation race (--click lands at the pre-move cursor position).
+hs.hotkey.bind({}, "f18", function()
+	local task = hs.task.new("/usr/local/bin/warpd", function(exitCode)
+		if exitCode == 0 then
+			hs.timer.doAfter(0.02, function()
+				hs.eventtap.leftClick(hs.mouse.absolutePosition())
+			end)
+		end
+	end, { "--hint2", "--oneshot" })
+	task:start()
 end)
 
 notify("Hammerspoon", "配置加载完成")
