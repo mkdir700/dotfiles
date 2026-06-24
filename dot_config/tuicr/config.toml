@@ -1,0 +1,5 @@
+# tuicr config — https://tuicr.dev
+#
+# Use the bundled light theme "catppuccin-latte". Bundled themes resolve first,
+# then local ones from themes/ (vesper.toml is kept there for reference).
+theme = "catppuccin-latte"

@@ -1,0 +1,65 @@
+# vesper.toml — tuicr local theme matching the Vesper palette (Raphael Amorim),
+# the same theme this machine's herdr uses. Warm, near-black, minimal dark theme.
+# Signature accent is peach/orange #ffc799. Activated via ../config.toml.
+#
+# All 41 color keys are required; values are #RRGGBB. `syntax_theme` is omitted
+# on purpose, so tuicr auto-selects a dark base16 highlighter from panel_bg.
+
+# --- base surfaces ----------------------------------------------------------
+panel_bg     = "#101010"   # near-black background
+bg_highlight = "#2a2a2a"   # selected / highlighted background
+fg_primary   = "#ffffff"   # primary text
+fg_secondary = "#a0a0a0"   # secondary text (vesper "white")
+fg_dim       = "#7e7e7e"   # dimmed text (vesper bright-black)
+
+# --- diff body --------------------------------------------------------------
+diff_add            = "#99ffe4"   # mint green — added lines
+diff_add_bg         = "#12231d"   # deep mint-on-black
+diff_del            = "#ff8080"   # soft red — removed lines
+diff_del_bg         = "#241414"   # deep red-on-black
+diff_context        = "#a0a0a0"   # unchanged context text
+diff_hunk_header    = "#aca1cf"   # @@ hunk header (vesper blue/lavender)
+expanded_context_fg = "#7e7e7e"   # expanded (folded) context
+
+# --- inline intra-line highlight (deeper than the full-line diff bg) --------
+syntax_add_bg = "#0e1b16"
+syntax_del_bg = "#1c0f0f"
+
+# --- file-tree status -------------------------------------------------------
+file_added    = "#99ffe4"   # mint
+file_modified = "#ffc799"   # peach/orange — vesper accent
+file_deleted  = "#ff8080"   # red
+file_renamed  = "#e29eca"   # purple/pink
+
+# --- review progress --------------------------------------------------------
+reviewed = "#99ffe4"   # mint — done
+pending  = "#ffc799"   # peach — todo
+
+# --- comment categories -----------------------------------------------------
+comment_note       = "#aca1cf"   # blue/lavender
+comment_suggestion = "#f591b2"   # pink (vesper bright-cyan)
+comment_issue      = "#ff8080"   # red
+comment_praise     = "#99ffe4"   # mint
+
+# --- chrome -----------------------------------------------------------------
+border_focused   = "#ffc799"   # peach accent on the focused pane
+border_unfocused = "#3a3a3a"   # muted border
+status_bar_bg    = "#1c1c1c"   # status bar background
+cursor_color     = "#ffc799"   # peach cursor block
+cursor_line_bg   = "#1a1a1a"   # subtle current-line tint
+branch_name      = "#f591b2"   # pink branch label
+help_indicator   = "#8b8b8b"   # grey help hints
+
+# --- transient messages (fg is shown on top of the colored bg) --------------
+message_info_fg    = "#101010"
+message_info_bg    = "#aca1cf"   # blue
+message_warning_fg = "#101010"
+message_warning_bg = "#e6b99d"   # amber/yellow
+message_error_fg   = "#ffffff"
+message_error_bg   = "#ff8080"   # red
+update_badge_fg    = "#101010"
+update_badge_bg    = "#ffc799"   # peach
+
+# --- mode indicator (e.g. NORMAL / INSERT in the status bar) ----------------
+mode_fg = "#101010"
+mode_bg = "#ffc799"   # peach accent
